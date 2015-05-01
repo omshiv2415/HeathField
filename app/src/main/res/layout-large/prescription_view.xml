@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="20dp"
+    android:background="@android:color/holo_orange_light">
+
+    <TextView
+        android:id="@+id/ranklabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/countrylabel"
+        android:layout_alignRight="@+id/countrylabel"
+        android:layout_alignTop="@+id/relativeLayout"
+        android:layout_marginTop="10dp"
+        android:text="Patient ID                    :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/patientID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/patientName"
+        android:layout_alignStart="@+id/patientName"
+        android:layout_alignTop="@+id/ranklabel"
+        android:text="IDX1721727"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/countrylabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/populationlabel"
+        android:layout_alignStart="@+id/populationlabel"
+        android:layout_below="@+id/ranklabel"
+        android:text="Patient Name             :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/patientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/patient_dob"
+        android:layout_alignStart="@+id/patient_dob"
+        android:layout_alignTop="@+id/countrylabel"
+        android:text="PETTER"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/populationlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/populationlabel1"
+        android:layout_alignRight="@+id/populationlabel1"
+        android:layout_below="@+id/countrylabel"
+        android:layout_marginLeft="5dp"
+        android:text="Patient Date of Birth  :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/patient_dob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/appointment_date"
+        android:layout_alignStart="@+id/appointment_date"
+        android:layout_alignTop="@+id/populationlabel"
+        android:text="26/11/1991"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/populationlabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/appointment_date"
+        android:layout_marginLeft="5dp"
+        android:text="Appointment Date      :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/appointment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/populationlabel"
+        android:layout_marginLeft="18dp"
+        android:layout_toEndOf="@+id/populationlabel"
+        android:layout_toRightOf="@+id/populationlabel"
+        android:text="17/05/2015"
+        android:textColor="@android:color/background_dark" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+
+        android:layout_alignParentStart="true"
+        android:background="@android:color/background_dark"
+        android:textColor="@android:color/background_dark"></RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/drname"
+        android:layout_toRightOf="@+id/drname" />
+
+    <TextView
+        android:id="@+id/Pdob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Heath Field Surgery"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="@dimen/abc_action_bar_subtitle_text_size"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Pdob"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/background_dark"
+        android:textColor="@android:color/background_dark" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/drname"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/holo_blue_light">
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/drname"
+        android:layout_alignStart="@+id/drname"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/r_x" />
+
+    <TextView
+        android:id="@+id/drname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/populationlabel"
+        android:layout_alignStart="@+id/populationlabel"
+        android:layout_below="@+id/populationlabel1"
+        android:layout_marginBottom="10dp"
+        android:text="Dr Name                      :  "
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/doctor_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/appointment_date"
+        android:layout_alignStart="@+id/appointment_date"
+        android:layout_alignTop="@+id/drname"
+        android:text="Dr R B Patel"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/medicine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="10dp"
+        android:text="Medication                  :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/medicine_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/doctor_Name"
+        android:layout_alignStart="@+id/doctor_Name"
+        android:layout_alignTop="@+id/medicine"
+        android:text="Amoxocilling"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/medicine"
+
+        android:layout_alignStart="@+id/medicine"
+        android:layout_alignTop="@+id/medicineAmount"
+        android:text="Amount                        :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/medicineAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignLeft="@+id/medicine_Name"
+        android:layout_alignStart="@+id/medicine_Name"
+        android:layout_below="@+id/medicine_Name"
+        android:text="1   Tab Every 9 Hours"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Docotorid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/amount"
+        android:layout_alignStart="@+id/amount"
+        android:layout_below="@+id/amount"
+        android:text="How Much (Disp)       :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/medicine_Despense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/medicineAmount"
+        android:layout_alignStart="@+id/medicineAmount"
+        android:layout_below="@+id/medicineAmount"
+        android:text="20 pills"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/drname"
+        android:layout_alignLeft="@+id/drname"
+        android:layout_alignRight="@+id/drname"
+        android:layout_alignStart="@+id/drname"
+        android:layout_below="@+id/Docotorid"
+        android:text="Refill                             :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/medicine_Refill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/medicine_Despense"
+        android:layout_alignStart="@+id/medicine_Despense"
+        android:layout_alignTop="@+id/textView10"
+        android:text="No"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/medicine_Refill"
+        android:layout_marginTop="49dp"
+        android:layout_toEndOf="@+id/medicine_Despense"
+        android:layout_toRightOf="@+id/medicine_Despense"
+        android:text="Doctor Signature :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView10"
+
+        android:layout_alignStart="@+id/textView10"
+        android:layout_alignTop="@+id/textView12"
+        android:text="Date  : "
+        android:textColor="@android:color/background_dark" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/textView12"
+
+        android:layout_alignStart="@+id/textView12"
+        android:layout_below="@+id/textView12"
+        android:background="#ffbdd6fc">
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/drname"
+        android:layout_alignStart="@+id/drname"
+        android:layout_below="@+id/doctor_Name"
+        android:text="Dr ID                             :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/doctorid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/doctor_Name"
+        android:layout_alignStart="@+id/doctor_Name"
+        android:layout_below="@+id/doctor_Name"
+        android:text="DR1234"
+        android:textColor="@android:color/background_dark" />
+
+    <Button
+        android:id="@+id/prescriptionorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Order Prescription" />
+
+
+</RelativeLayout>

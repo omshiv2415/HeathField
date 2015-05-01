@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:drawable/dialog_holo_light_frame"
+    >
+
+    <TextView
+        android:id="@+id/ranklabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/ranklabel"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Doctor_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/ranklabel"
+        android:text="DR1234"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <TextView
+        android:id="@+id/countrylabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ranklabel"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/countrylabel"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Doctor_id"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/countrylabel"
+        android:text="DR BR Patel"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/populationlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/countrylabel"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/populationlabel"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Doctor_name"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/populationlabel"
+        android:text="28 May 2015 Thu 4:10"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/populationlabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Appointment"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/object"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Appointment_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/populationlabel1"
+
+        android:layout_toEndOf="@+id/populationlabel1"
+        android:layout_toRightOf="@+id/populationlabel1"
+        android:text="5"
+        android:textColor="@android:color/background_dark" />
+
+</RelativeLayout>

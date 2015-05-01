@@ -1,0 +1,181 @@
+<html>
+<head>
+<title>Prescription_View.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(128,128,128); }
+.s3 { color: rgb(106,135,89); }
+.s4 { color: rgb(104,151,187); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Prescription_View.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">appointment.booking.com.Prescription</span><span class="s0">;</span><span class="s1"> 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span><span class="s1"> 
+<a name="l4"><span class="ln">4    </span></a></span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span><span class="s1"> 
+<a name="l5"><span class="ln">5    </span></a></span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import </span><span class="s1">android.view.Gravity</span><span class="s0">;</span><span class="s1"> 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span><span class="s1"> 
+<a name="l8"><span class="ln">8    </span></a></span><span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span><span class="s1"> 
+<a name="l9"><span class="ln">9    </span></a></span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span><span class="s1"> 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span><span class="s1"> 
+<a name="l11"><span class="ln">11   </span></a> 
+<a name="l12"><span class="ln">12   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParseInstallation</span><span class="s0">;</span><span class="s1"> 
+<a name="l13"><span class="ln">13   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParseObject</span><span class="s0">;</span><span class="s1"> 
+<a name="l14"><span class="ln">14   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParsePush</span><span class="s0">;</span><span class="s1"> 
+<a name="l15"><span class="ln">15   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParseQuery</span><span class="s0">;</span><span class="s1"> 
+<a name="l16"><span class="ln">16   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParseUser</span><span class="s0">;</span><span class="s1"> 
+<a name="l17"><span class="ln">17   </span></a> 
+<a name="l18"><span class="ln">18   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/heathfield/R.java.html">appointment.booking.com.heathfield.R</a>;</span><span class="s1"> 
+<a name="l19"><span class="ln">19   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/patient/Patient.java.html">appointment.booking.com.patient.Patient</a>;</span><span class="s1"> 
+<a name="l20"><span class="ln">20   </span></a> 
+<a name="l21"><span class="ln">21   </span></a></span><span class="s0">public class </span><span class="s1">Prescription_View </span><span class="s0">extends </span><span class="s1">Activity { 
+<a name="l22"><span class="ln">22   </span></a>    </span><span class="s2">// Declare Variables</span><span class="s1"> 
+<a name="l23"><span class="ln">23   </span></a>    TextView PatientId</span><span class="s0">;</span><span class="s1"> 
+<a name="l24"><span class="ln">24   </span></a>    TextView PatientName</span><span class="s0">;</span><span class="s1"> 
+<a name="l25"><span class="ln">25   </span></a>    TextView PatientDob</span><span class="s0">;</span><span class="s1"> 
+<a name="l26"><span class="ln">26   </span></a>    TextView PatientAppointmentdate</span><span class="s0">;</span><span class="s1"> 
+<a name="l27"><span class="ln">27   </span></a>    TextView DoctorName</span><span class="s0">;</span><span class="s1"> 
+<a name="l28"><span class="ln">28   </span></a>    TextView DoctorID</span><span class="s0">;</span><span class="s1"> 
+<a name="l29"><span class="ln">29   </span></a>    TextView Medication</span><span class="s0">;</span><span class="s1"> 
+<a name="l30"><span class="ln">30   </span></a>    TextView MedicineAmount</span><span class="s0">;</span><span class="s1"> 
+<a name="l31"><span class="ln">31   </span></a>    TextView MedicineDispese</span><span class="s0">;</span><span class="s1"> 
+<a name="l32"><span class="ln">32   </span></a>    TextView MedicineRefill</span><span class="s0">;</span><span class="s1"> 
+<a name="l33"><span class="ln">33   </span></a> 
+<a name="l34"><span class="ln">34   </span></a>    String P_ID</span><span class="s0">;</span><span class="s1"> 
+<a name="l35"><span class="ln">35   </span></a>    String P_NAME</span><span class="s0">;</span><span class="s1"> 
+<a name="l36"><span class="ln">36   </span></a>    String P_DOB</span><span class="s0">;</span><span class="s1"> 
+<a name="l37"><span class="ln">37   </span></a>    String P_APPOINTMENT</span><span class="s0">;</span><span class="s1"> 
+<a name="l38"><span class="ln">38   </span></a>    String P_DOCTOR_NAME</span><span class="s0">;</span><span class="s1"> 
+<a name="l39"><span class="ln">39   </span></a>    String P_MEDICATION</span><span class="s0">;</span><span class="s1"> 
+<a name="l40"><span class="ln">40   </span></a>    String P_MEDICINEAMOUNT</span><span class="s0">;</span><span class="s1"> 
+<a name="l41"><span class="ln">41   </span></a>    String P_MEDICINE_DISPENSE</span><span class="s0">;</span><span class="s1"> 
+<a name="l42"><span class="ln">42   </span></a>    String P_MEDICINE_REFILL</span><span class="s0">;</span><span class="s1"> 
+<a name="l43"><span class="ln">43   </span></a>    String P_DoctorId</span><span class="s0">;</span><span class="s1"> 
+<a name="l44"><span class="ln">44   </span></a>    Button ORDER_PRISCRIPTION</span><span class="s0">;</span><span class="s1"> 
+<a name="l45"><span class="ln">45   </span></a>    Button cancelAppointment</span><span class="s0">;</span><span class="s1"> 
+<a name="l46"><span class="ln">46   </span></a> 
+<a name="l47"><span class="ln">47   </span></a>    @Override 
+<a name="l48"><span class="ln">48   </span></a>    </span><span class="s0">public void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+<a name="l49"><span class="ln">49   </span></a>        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+<a name="l50"><span class="ln">50   </span></a>        setContentView(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.layout</a>.prescription_view)</span><span class="s0">;</span><span class="s1"> 
+<a name="l51"><span class="ln">51   </span></a>        </span><span class="s2">// Retrieve data from booking appointment on item click event</span><span class="s1"> 
+<a name="l52"><span class="ln">52   </span></a>        Intent i = getIntent()</span><span class="s0">;</span><span class="s1"> 
+<a name="l53"><span class="ln">53   </span></a> 
+<a name="l54"><span class="ln">54   </span></a>        P_ID = i.getStringExtra(</span><span class="s3">&quot;PatientId&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l55"><span class="ln">55   </span></a>        P_NAME = i.getStringExtra(</span><span class="s3">&quot;PatientName&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l56"><span class="ln">56   </span></a>        P_DOB = i.getStringExtra(</span><span class="s3">&quot;PatientDob&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l57"><span class="ln">57   </span></a>        P_APPOINTMENT = i.getStringExtra(</span><span class="s3">&quot;AppointmentDate&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l58"><span class="ln">58   </span></a>        P_DOCTOR_NAME = i.getStringExtra(</span><span class="s3">&quot;DoctorName&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l59"><span class="ln">59   </span></a>        P_MEDICATION = i.getStringExtra(</span><span class="s3">&quot;Medication&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l60"><span class="ln">60   </span></a>        P_MEDICINEAMOUNT = i.getStringExtra(</span><span class="s3">&quot;MedicationAmount&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l61"><span class="ln">61   </span></a>        P_MEDICINE_DISPENSE = i.getStringExtra(</span><span class="s3">&quot;MedicineDispense&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l62"><span class="ln">62   </span></a>        P_MEDICINE_REFILL = i.getStringExtra(</span><span class="s3">&quot;MedicineRefill&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l63"><span class="ln">63   </span></a>        P_DoctorId = i.getStringExtra(</span><span class="s3">&quot;DoctorID&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l64"><span class="ln">64   </span></a> 
+<a name="l65"><span class="ln">65   </span></a> 
+<a name="l66"><span class="ln">66   </span></a>        </span><span class="s2">// Locate the TextViews in singleitemview.xml</span><span class="s1"> 
+<a name="l67"><span class="ln">67   </span></a>        PatientId = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.patientID)</span><span class="s0">;</span><span class="s1"> 
+<a name="l68"><span class="ln">68   </span></a>        PatientName = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.patientName)</span><span class="s0">;</span><span class="s1"> 
+<a name="l69"><span class="ln">69   </span></a>        PatientDob = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.patient_dob)</span><span class="s0">;</span><span class="s1"> 
+<a name="l70"><span class="ln">70   </span></a>        PatientAppointmentdate = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.appointment_date)</span><span class="s0">;</span><span class="s1"> 
+<a name="l71"><span class="ln">71   </span></a>        DoctorName = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.doctor_Name)</span><span class="s0">;</span><span class="s1"> 
+<a name="l72"><span class="ln">72   </span></a>        DoctorID = (TextView)findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.doctorid)</span><span class="s0">;</span><span class="s1"> 
+<a name="l73"><span class="ln">73   </span></a>        Medication  = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.medicine_Name)</span><span class="s0">;</span><span class="s1"> 
+<a name="l74"><span class="ln">74   </span></a>        MedicineAmount = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.medicineAmount)</span><span class="s0">;</span><span class="s1"> 
+<a name="l75"><span class="ln">75   </span></a>        MedicineDispese = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.medicine_Despense)</span><span class="s0">;</span><span class="s1"> 
+<a name="l76"><span class="ln">76   </span></a>        MedicineRefill = (TextView) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.medicine_Refill)</span><span class="s0">;</span><span class="s1"> 
+<a name="l77"><span class="ln">77   </span></a> 
+<a name="l78"><span class="ln">78   </span></a>        ORDER_PRISCRIPTION = (Button)findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.prescriptionorder)</span><span class="s0">;</span><span class="s1"> 
+<a name="l79"><span class="ln">79   </span></a> 
+<a name="l80"><span class="ln">80   </span></a>        </span><span class="s2">// Load the results into the TextViews</span><span class="s1"> 
+<a name="l81"><span class="ln">81   </span></a>        PatientId.setText(P_ID)</span><span class="s0">;</span><span class="s1"> 
+<a name="l82"><span class="ln">82   </span></a>        PatientName.setText(P_NAME)</span><span class="s0">;</span><span class="s1"> 
+<a name="l83"><span class="ln">83   </span></a>        PatientDob.setText(P_DOB)</span><span class="s0">;</span><span class="s1"> 
+<a name="l84"><span class="ln">84   </span></a>        PatientAppointmentdate.setText(P_APPOINTMENT)</span><span class="s0">;</span><span class="s1"> 
+<a name="l85"><span class="ln">85   </span></a>        DoctorName.setText(P_DOCTOR_NAME)</span><span class="s0">;</span><span class="s1"> 
+<a name="l86"><span class="ln">86   </span></a>        DoctorID.setText(P_DoctorId)</span><span class="s0">;</span><span class="s1"> 
+<a name="l87"><span class="ln">87   </span></a>        Medication.setText(P_MEDICATION)</span><span class="s0">;</span><span class="s1"> 
+<a name="l88"><span class="ln">88   </span></a>        MedicineAmount.setText(P_MEDICINEAMOUNT)</span><span class="s0">;</span><span class="s1"> 
+<a name="l89"><span class="ln">89   </span></a>        MedicineDispese.setText(P_MEDICINE_DISPENSE)</span><span class="s0">;</span><span class="s1"> 
+<a name="l90"><span class="ln">90   </span></a>        MedicineRefill.setText(P_MEDICINE_REFILL)</span><span class="s0">;</span><span class="s1"> 
+<a name="l91"><span class="ln">91   </span></a> 
+<a name="l92"><span class="ln">92   </span></a> 
+<a name="l93"><span class="ln">93   </span></a> 
+<a name="l94"><span class="ln">94   </span></a>        ORDER_PRISCRIPTION.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+<a name="l95"><span class="ln">95   </span></a>            String pid = PatientId.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l96"><span class="ln">96   </span></a>            String pname = PatientName.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l97"><span class="ln">97   </span></a>            String pdateofbirth= PatientDob.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l98"><span class="ln">98   </span></a>            String pappointment = PatientAppointmentdate.getText().toString()</span><span class="s0">;</span><span class="s1"> 
+<a name="l99"><span class="ln">99   </span></a>            String pdocotor = DoctorName.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l100"><span class="ln">100  </span></a>            String pdoctorId = DoctorID.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l101"><span class="ln">101  </span></a>            String pmedication = Medication.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l102"><span class="ln">102  </span></a>            String pmedicationamount= MedicineAmount.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l103"><span class="ln">103  </span></a>            String pmedicationdispense = MedicineDispese.getText().toString()</span><span class="s0">;</span><span class="s1"> 
+<a name="l104"><span class="ln">104  </span></a>            String pmedicatonrefill = MedicineRefill.getText().toString()</span><span class="s0">;</span><span class="s1"> 
+<a name="l105"><span class="ln">105  </span></a> 
+<a name="l106"><span class="ln">106  </span></a>            @Override 
+<a name="l107"><span class="ln">107  </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(View view) { 
+<a name="l108"><span class="ln">108  </span></a>                Integer prescription = (Integer) ParseUser.getCurrentUser().get(</span><span class="s3">&quot;Order_Prescription&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l109"><span class="ln">109  </span></a>                </span><span class="s0">if</span><span class="s1">(pmedicatonrefill.equals(</span><span class="s3">&quot;no&quot;</span><span class="s1">)||pmedicatonrefill.equals(</span><span class="s3">&quot;NO&quot;</span><span class="s1">)) { 
+<a name="l110"><span class="ln">110  </span></a>                    Toast toast = Toast.makeText(Prescription_View.</span><span class="s0">this, </span><span class="s3">&quot; Sorry you can't order prescription&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG)</span><span class="s0">;</span><span class="s1"> 
+<a name="l111"><span class="ln">111  </span></a>                    toast.setGravity(Gravity.CENTER</span><span class="s0">, </span><span class="s4">0</span><span class="s0">, </span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l112"><span class="ln">112  </span></a>                    toast.show()</span><span class="s0">;</span><span class="s1"> 
+<a name="l113"><span class="ln">113  </span></a> 
+<a name="l114"><span class="ln">114  </span></a>                }</span><span class="s0">else if</span><span class="s1">(prescription &gt; </span><span class="s4">5</span><span class="s1">){ 
+<a name="l115"><span class="ln">115  </span></a>                    Toast toast = Toast.makeText(Prescription_View.</span><span class="s0">this, </span><span class="s3">&quot; Sorry you can't order more than 5 prescription&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG)</span><span class="s0">;</span><span class="s1"> 
+<a name="l116"><span class="ln">116  </span></a>                    toast.setGravity(Gravity.CENTER</span><span class="s0">, </span><span class="s4">0</span><span class="s0">, </span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l117"><span class="ln">117  </span></a>                    toast.show()</span><span class="s0">;</span><span class="s1"> 
+<a name="l118"><span class="ln">118  </span></a>                } 
+<a name="l119"><span class="ln">119  </span></a>                </span><span class="s0">else</span><span class="s1">{ 
+<a name="l120"><span class="ln">120  </span></a> 
+<a name="l121"><span class="ln">121  </span></a>                ParseObject PatientPrescription = </span><span class="s0">new </span><span class="s1">ParseObject(</span><span class="s3">&quot;Ordered_Prescription&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l122"><span class="ln">122  </span></a> 
+<a name="l123"><span class="ln">123  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;createdBy&quot;</span><span class="s0">, </span><span class="s1">ParseUser.getCurrentUser())</span><span class="s0">;</span><span class="s1"> 
+<a name="l124"><span class="ln">124  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Patient_ID&quot;</span><span class="s0">,</span><span class="s1">pid)</span><span class="s0">;</span><span class="s1"> 
+<a name="l125"><span class="ln">125  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Patient_Name&quot;</span><span class="s0">,</span><span class="s1">pname)</span><span class="s0">;</span><span class="s1"> 
+<a name="l126"><span class="ln">126  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Patient_Date_of_Birth&quot;</span><span class="s0">,</span><span class="s1">pdateofbirth)</span><span class="s0">;</span><span class="s1"> 
+<a name="l127"><span class="ln">127  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;AppointmentDate&quot;</span><span class="s0">,</span><span class="s1">pappointment)</span><span class="s0">;</span><span class="s1"> 
+<a name="l128"><span class="ln">128  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Doctor_Name&quot;</span><span class="s0">,</span><span class="s1">pdocotor)</span><span class="s0">;</span><span class="s1"> 
+<a name="l129"><span class="ln">129  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Medication&quot;</span><span class="s0">,</span><span class="s1">pmedication)</span><span class="s0">;</span><span class="s1"> 
+<a name="l130"><span class="ln">130  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Medicine_Amount&quot;</span><span class="s0">,</span><span class="s1">pmedicationamount)</span><span class="s0">;</span><span class="s1"> 
+<a name="l131"><span class="ln">131  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Medicine_Dispense&quot;</span><span class="s0">,</span><span class="s1">pmedicationdispense)</span><span class="s0">;</span><span class="s1"> 
+<a name="l132"><span class="ln">132  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Medicine_Refill&quot;</span><span class="s0">,</span><span class="s1">pmedicatonrefill)</span><span class="s0">;</span><span class="s1"> 
+<a name="l133"><span class="ln">133  </span></a>                PatientPrescription.put(</span><span class="s3">&quot;Doctor_id&quot;</span><span class="s0">,</span><span class="s1">pdoctorId)</span><span class="s0">;</span><span class="s1"> 
+<a name="l134"><span class="ln">134  </span></a>                ParseUser user = ParseUser.getCurrentUser()</span><span class="s0">;</span><span class="s1"> 
+<a name="l135"><span class="ln">135  </span></a>                user.increment(</span><span class="s3">&quot;Order_Prescription&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l136"><span class="ln">136  </span></a>                PatientPrescription.saveInBackground()</span><span class="s0">;</span><span class="s1"> 
+<a name="l137"><span class="ln">137  </span></a>                </span><span class="s2">// sending a notification to user once they booked the appointment</span><span class="s1"> 
+<a name="l138"><span class="ln">138  </span></a>                    ParseQuery&lt;ParseInstallation&gt; pQuery = ParseInstallation.getQuery()</span><span class="s0">;</span><span class="s1"> 
+<a name="l139"><span class="ln">139  </span></a>                    pQuery.whereEqualTo(</span><span class="s3">&quot;username&quot;</span><span class="s0">, </span><span class="s1">ParseUser.getCurrentUser())</span><span class="s0">;</span><span class="s1"> 
+<a name="l140"><span class="ln">140  </span></a> 
+<a name="l141"><span class="ln">141  </span></a>                    ParsePush push = </span><span class="s0">new </span><span class="s1">ParsePush()</span><span class="s0">;</span><span class="s1"> 
+<a name="l142"><span class="ln">142  </span></a>                    push.setQuery(pQuery)</span><span class="s0">;</span><span class="s1"> 
+<a name="l143"><span class="ln">143  </span></a>                    push.setMessage(</span><span class="s3">&quot;Confirmation of prescription order&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l144"><span class="ln">144  </span></a>                    push.sendInBackground()</span><span class="s0">;</span><span class="s1"> 
+<a name="l145"><span class="ln">145  </span></a>                    Toast toast = Toast.makeText(Prescription_View.</span><span class="s0">this, </span><span class="s3">&quot;Prescription Order Successfully &quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG)</span><span class="s0">;</span><span class="s1"> 
+<a name="l146"><span class="ln">146  </span></a>                    toast.setGravity(Gravity.CENTER</span><span class="s0">, </span><span class="s4">0</span><span class="s0">, </span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l147"><span class="ln">147  </span></a>                    toast.show()</span><span class="s0">;</span><span class="s1"> 
+<a name="l148"><span class="ln">148  </span></a>                    Intent takeUserHome = </span><span class="s0">new </span><span class="s1">Intent(Prescription_View.</span><span class="s0">this, <a href="../../../../appointment/booking/com/patient/Patient.java.html">Patient</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l149"><span class="ln">149  </span></a>                    startActivity(takeUserHome)</span><span class="s0">;</span><span class="s1"> 
+<a name="l150"><span class="ln">150  </span></a> 
+<a name="l151"><span class="ln">151  </span></a> 
+<a name="l152"><span class="ln">152  </span></a>            } 
+<a name="l153"><span class="ln">153  </span></a>        }})</span><span class="s0">;</span><span class="s1"> 
+<a name="l154"><span class="ln">154  </span></a> 
+<a name="l155"><span class="ln">155  </span></a> 
+<a name="l156"><span class="ln">156  </span></a> 
+<a name="l157"><span class="ln">157  </span></a> 
+<a name="l158"><span class="ln">158  </span></a>}}</span></pre>
+</body>
+</html>

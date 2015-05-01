@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Patient.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(98,151,85); }
+.s3 { color: rgb(128,128,128); }
+.s4 { color: rgb(106,135,89); }
+.s5 { color: rgb(104,151,187); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Patient.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">appointment.booking.com.patient</span><span class="s0">;</span><span class="s1"> 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">android.app.TabActivity</span><span class="s0">;</span><span class="s1"> 
+<a name="l4"><span class="ln">4    </span></a></span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span><span class="s1"> 
+<a name="l5"><span class="ln">5    </span></a></span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import </span><span class="s1">android.view.Gravity</span><span class="s0">;</span><span class="s1"> 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s0">import </span><span class="s1">android.widget.TabHost</span><span class="s0">;</span><span class="s1"> 
+<a name="l8"><span class="ln">8    </span></a></span><span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span><span class="s1"> 
+<a name="l9"><span class="ln">9    </span></a> 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParseInstallation</span><span class="s0">;</span><span class="s1"> 
+<a name="l11"><span class="ln">11   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParseUser</span><span class="s0">;</span><span class="s1"> 
+<a name="l12"><span class="ln">12   </span></a> 
+<a name="l13"><span class="ln">13   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/Prescription/PrescriptionActivity.java.html">appointment.booking.com.Prescription.PrescriptionActivity</a>;</span><span class="s1"> 
+<a name="l14"><span class="ln">14   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/Request_Appintment/RequestAppointment.java.html">appointment.booking.com.Request_Appintment.RequestAppointment</a>;</span><span class="s1"> 
+<a name="l15"><span class="ln">15   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/booking/BookingAppointment.java.html">appointment.booking.com.booking.BookingAppointment</a>;</span><span class="s1"> 
+<a name="l16"><span class="ln">16   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/cancel/PatientCancelActivity.java.html">appointment.booking.com.cancel.PatientCancelActivity</a>;</span><span class="s1"> 
+<a name="l17"><span class="ln">17   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/heathfield/Login.java.html">appointment.booking.com.heathfield.Login</a>;</span><span class="s1"> 
+<a name="l18"><span class="ln">18   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/heathfield/R.java.html">appointment.booking.com.heathfield.R</a>;</span><span class="s1"> 
+<a name="l19"><span class="ln">19   </span></a> 
+<a name="l20"><span class="ln">20   </span></a></span><span class="s2">/** 
+<a name="l21"><span class="ln">21   </span></a> * Created by omshiv on 14/02/2015. 
+<a name="l22"><span class="ln">22   </span></a> */</span><span class="s1"> 
+<a name="l23"><span class="ln">23   </span></a></span><span class="s0">public class </span><span class="s1">Patient </span><span class="s0">extends </span><span class="s1">TabActivity { 
+<a name="l24"><span class="ln">24   </span></a> 
+<a name="l25"><span class="ln">25   </span></a>    </span><span class="s0">public void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+<a name="l26"><span class="ln">26   </span></a>        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+<a name="l27"><span class="ln">27   </span></a>        setContentView(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.layout</a>.activity_patient_main)</span><span class="s0">;</span><span class="s1"> 
+<a name="l28"><span class="ln">28   </span></a> 
+<a name="l29"><span class="ln">29   </span></a>        </span><span class="s3">// create the TabHost that will contain the Tabs</span><span class="s1"> 
+<a name="l30"><span class="ln">30   </span></a>        TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost)</span><span class="s0">;</span><span class="s1"> 
+<a name="l31"><span class="ln">31   </span></a>        tabHost.getTabWidget().setDividerDrawable(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l32"><span class="ln">32   </span></a> 
+<a name="l33"><span class="ln">33   </span></a>        </span><span class="s0">final </span><span class="s1">String verify = ParseUser.getCurrentUser().get(</span><span class="s4">&quot;Verify&quot;</span><span class="s1">).toString()</span><span class="s0">;</span><span class="s1"> 
+<a name="l34"><span class="ln">34   </span></a>        </span><span class="s3">//final String verify =  &quot;Doctor&quot;;</span><span class="s1"> 
+<a name="l35"><span class="ln">35   </span></a>        </span><span class="s0">final </span><span class="s1">String DcCheck = </span><span class="s4">&quot;Patient&quot;</span><span class="s0">;</span><span class="s1"> 
+<a name="l36"><span class="ln">36   </span></a> 
+<a name="l37"><span class="ln">37   </span></a>        </span><span class="s0">if </span><span class="s1">(verify.equals(DcCheck)) { 
+<a name="l38"><span class="ln">38   </span></a>            ParseInstallation installation = ParseInstallation.getCurrentInstallation()</span><span class="s0">;</span><span class="s1"> 
+<a name="l39"><span class="ln">39   </span></a>            installation.put(</span><span class="s4">&quot;username&quot;</span><span class="s0">, </span><span class="s1">ParseUser.getCurrentUser())</span><span class="s0">;</span><span class="s1"> 
+<a name="l40"><span class="ln">40   </span></a>            installation.saveInBackground()</span><span class="s0">;</span><span class="s1"> 
+<a name="l41"><span class="ln">41   </span></a>            </span><span class="s3">//Toast toast = Toast.makeText(Patient.this, &quot; Welcome ! &quot; +</span><span class="s1"> 
+<a name="l42"><span class="ln">42   </span></a>            </span><span class="s3">//ParseUser.getCurrentUser().getUsername(), Toast.LENGTH_LONG);</span><span class="s1"> 
+<a name="l43"><span class="ln">43   </span></a>            </span><span class="s3">//toast.setGravity(Gravity.CENTER, 0, 0);</span><span class="s1"> 
+<a name="l44"><span class="ln">44   </span></a>            </span><span class="s3">//  toast.show();</span><span class="s1"> 
+<a name="l45"><span class="ln">45   </span></a>        }</span><span class="s0">else </span><span class="s1">{ 
+<a name="l46"><span class="ln">46   </span></a>            Toast toast = Toast.makeText(Patient.</span><span class="s0">this, </span><span class="s4">&quot; Please try Doctor Login &quot; </span><span class="s1">+ 
+<a name="l47"><span class="ln">47   </span></a>                    ParseUser.getCurrentUser().getUsername()</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG)</span><span class="s0">;</span><span class="s1"> 
+<a name="l48"><span class="ln">48   </span></a>            toast.setGravity(Gravity.CENTER</span><span class="s0">, </span><span class="s5">0</span><span class="s0">, </span><span class="s5">0</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l49"><span class="ln">49   </span></a>            toast.show()</span><span class="s0">;</span><span class="s1"> 
+<a name="l50"><span class="ln">50   </span></a>            Intent takeUserHome = </span><span class="s0">new </span><span class="s1">Intent(Patient.</span><span class="s0">this, <a href="../../../../appointment/booking/com/heathfield/Login.java.html">Login</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l51"><span class="ln">51   </span></a>            startActivity(takeUserHome)</span><span class="s0">;</span><span class="s1"> 
+<a name="l52"><span class="ln">52   </span></a> 
+<a name="l53"><span class="ln">53   </span></a> 
+<a name="l54"><span class="ln">54   </span></a> 
+<a name="l55"><span class="ln">55   </span></a>        } 
+<a name="l56"><span class="ln">56   </span></a> 
+<a name="l57"><span class="ln">57   </span></a>        TabHost.TabSpec tab1 = tabHost.newTabSpec(</span><span class="s4">&quot;App Booking &quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l58"><span class="ln">58   </span></a>        TabHost.TabSpec tab2 = tabHost.newTabSpec(</span><span class="s4">&quot;App Cancel&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l59"><span class="ln">59   </span></a>        TabHost.TabSpec tab3 = tabHost.newTabSpec(</span><span class="s4">&quot;Pre Order&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l60"><span class="ln">60   </span></a>        TabHost.TabSpec tab4 = tabHost.newTabSpec(</span><span class="s4">&quot;Request&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l61"><span class="ln">61   </span></a> 
+<a name="l62"><span class="ln">62   </span></a>        </span><span class="s3">// Set the Tab name and Activity</span><span class="s1"> 
+<a name="l63"><span class="ln">63   </span></a>        </span><span class="s3">// that will be opened when particular Tab will be selected</span><span class="s1"> 
+<a name="l64"><span class="ln">64   </span></a>        tab1.setIndicator(</span><span class="s4">&quot;Appointment Booking&quot;</span><span class="s0">,</span><span class="s1">getResources().getDrawable(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.drawable</a>.appointmentnewf))</span><span class="s0">;</span><span class="s1"> 
+<a name="l65"><span class="ln">65   </span></a>        tab1.setContent(</span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this,<a href="../../../../appointment/booking/com/booking/BookingAppointment.java.html">BookingAppointment</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+<a name="l66"><span class="ln">66   </span></a> 
+<a name="l67"><span class="ln">67   </span></a>        tab2.setIndicator(</span><span class="s4">&quot;Appointment Cancel&quot;</span><span class="s0">,</span><span class="s1">getResources().getDrawable(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.drawable</a>.appointmentmissedc))</span><span class="s0">;</span><span class="s1"> 
+<a name="l68"><span class="ln">68   </span></a>        tab2.setContent(</span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this,<a href="../../../../appointment/booking/com/cancel/PatientCancelActivity.java.html">PatientCancelActivity</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+<a name="l69"><span class="ln">69   </span></a> 
+<a name="l70"><span class="ln">70   </span></a>        tab3.setIndicator(</span><span class="s4">&quot;Prescription Order&quot;</span><span class="s0">,</span><span class="s1">getResources().getDrawable(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.drawable</a>.prescriptionf))</span><span class="s0">;</span><span class="s1"> 
+<a name="l71"><span class="ln">71   </span></a>        tab3.setContent(</span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this,<a href="../../../../appointment/booking/com/Prescription/PrescriptionActivity.java.html">PrescriptionActivity</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+<a name="l72"><span class="ln">72   </span></a> 
+<a name="l73"><span class="ln">73   </span></a>        tab4.setIndicator(</span><span class="s4">&quot;Request Appointment&quot;</span><span class="s0">,</span><span class="s1">getResources().getDrawable(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.drawable</a>.requestf))</span><span class="s0">;</span><span class="s1"> 
+<a name="l74"><span class="ln">74   </span></a>        tab4.setContent(</span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this,<a href="../../../../appointment/booking/com/Request_Appintment/RequestAppointment.java.html">RequestAppointment</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+<a name="l75"><span class="ln">75   </span></a>        </span><span class="s2">/** Add the tabs  to the TabHost to display. */</span><span class="s1"> 
+<a name="l76"><span class="ln">76   </span></a>        tabHost.addTab(tab1)</span><span class="s0">;</span><span class="s1"> 
+<a name="l77"><span class="ln">77   </span></a>        tabHost.addTab(tab2)</span><span class="s0">;</span><span class="s1"> 
+<a name="l78"><span class="ln">78   </span></a>        tabHost.addTab(tab3)</span><span class="s0">;</span><span class="s1"> 
+<a name="l79"><span class="ln">79   </span></a>        tabHost.addTab(tab4)</span><span class="s0">;</span><span class="s1"> 
+<a name="l80"><span class="ln">80   </span></a> 
+<a name="l81"><span class="ln">81   </span></a>    }}</span></pre>
+</body>
+</html>

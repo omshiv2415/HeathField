@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="appointment.booking.com.cancel.History.Appointment_Cancel_History">
+
+
+    <ListView
+        android:id="@+id/AppointmentListViewHistory"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_blue_light"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/divider"
+        android:fastScrollEnabled="true"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:listSelector="@android:color/holo_orange_light"
+        android:longClickable="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Appointment Cancellation History"
+        android:id="@+id/Empty_history"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold|italic"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/heath"
+        android:background="@android:drawable/alert_dark_frame"
+        android:gravity="center"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/holo_blue_light">
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/holo_blue_light"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/divider"
+        android:fastScrollEnabled="true"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:listSelector="@android:color/holo_orange_light"
+        android:longClickable="true" />
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="35dp"
+        android:background="@android:color/holo_blue_light">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Book Your Appointment"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold|italic"
+            android:textSize="@dimen/abc_action_bar_subtitle_text_size" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listview"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Total Patient"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="15dp"
+        android:text="Male Patient"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="15dp"
+        android:text="Female Patient"
+        android:textColor="@android:color/background_dark" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/background_light"></RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/TotalPatient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginLeft="25dp"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="0"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/FemalePat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView4"
+
+        android:layout_alignLeft="@+id/TotalPatient"
+        android:layout_alignStart="@+id/TotalPatient"
+        android:text="0"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/MalePatient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TotalPatient"
+        android:layout_alignStart="@+id/TotalPatient"
+        android:layout_alignTop="@+id/AvailableApp"
+        android:text="0"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/DocPopular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/TotalPatient"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@+id/TotalPatient"
+        android:layout_toRightOf="@+id/TotalPatient"
+        android:text="Popular Doctor"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/DocAvailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/DocPopular"
+        android:layout_alignStart="@+id/DocPopular"
+
+        android:layout_alignTop="@+id/FemalePat"
+        android:text="Availability"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/popDoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/DocPopular"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/DocPopular"
+        android:layout_toRightOf="@+id/DocPopular"
+        android:text="DR B R Patel"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/Available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/popDoc"
+
+        android:layout_alignStart="@+id/popDoc"
+        android:layout_alignTop="@+id/DocAvailable"
+        android:text="Yes"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/AvailableApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignLeft="@+id/DocPopular"
+        android:layout_alignStart="@+id/DocPopular"
+        android:text="Available App..."
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/TotalAppointments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/popDoc"
+        android:layout_alignStart="@+id/popDoc"
+        android:layout_alignTop="@+id/AvailableApp"
+        android:text="0"
+        android:textColor="@android:color/background_light" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_alignBottom="@+id/relativeLayout"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/background_dark"
+        android:orientation="horizontal" />
+
+
+
+
+</RelativeLayout>

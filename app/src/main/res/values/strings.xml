@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HeathField</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_doctor_login">DoctorLogin</string>
+    <string name="title_activity_patient_login">PatientLogin</string>
+    <string name="title_activity_doctor_home">DoctorHome</string>
+    <string name="title_activity_patient_register">PatientRegister</string>
+    <string name="title_activity_patient_home">PatientHome</string>
+    <string name="sign_up_error_title">update not successful</string>
+    <string name="title_activity_my">MyActivity</string>
+    <string name="title_activity_patint_main">PatintMainActivity</string>
+    <string name="welcome">Welcome to Heathfield Surgery </string>
+    <string name="title_activity_appointment">AppointmentActivity</string>
+    <string name="title_activity_prescription">PrescriptionActivity</string>
+    <string name="title_activity_cancel_appointment">CancelAppointmentActivity</string>
+    <string name="title_activity_notification_patient">Notification_patient</string>
+    <string name="reminder">Heath Field Appointment Reminder</string>
+    <string name="namelabel">list</string>
+    <string name="title_activity_main">Parse Custom ListView</string>
+    <string name="ranklabel">      "Doctor ID              : "</string>
+    <string name="countrylabel">   "Doctor Name       : "</string>
+    <string name="populationlabel">"Appointment        : "</string>
+    <string name="object">         "Appointment No  : "</string>
+    <string name="PID:">Patient ID     :</string>
+    <string name="some_hint">     Type here to filter…</string>
+    <string name="title_activity_request_appointment">RequestAppointment</string>
+    <string name="title_activity_confirm__prescription">Confirm_Prescription</string>
+    <string name="title_activity_doctor__main">Doctor_Main</string>
+    <string name="title_activity_confirm__appointment">Confirm_Appointment</string>
+    <string name="title_activity_appointment__cancel__history">Appointment_Cancel_History</string>
+    <string name="title_activity_appointment__booking_">Appointment_Booking_Activity</string>
+
+</resources>

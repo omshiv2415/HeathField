@@ -1,0 +1,184 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viral"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:paddingBottom="@dimen/Padleft"
+    android:paddingLeft="@dimen/Padleft"
+    android:paddingRight="@dimen/Padleft"
+    android:paddingTop="@dimen/Padleft"
+    android:visibility="visible"
+    tools:context="com.viral.omshiv.user.HomePage">
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_light"
+        android:visibility="visible"
+        >
+
+    <EditText
+        android:id="@+id/usernameLoginTextBox"
+        style="@android:style/Animation.Toast"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="100dp"
+        android:autoText="true"
+        android:background="@drawable/username"
+        android:focusable="true"
+        android:hint="User Name"
+        android:inputType="text"
+        android:maxLength="@integer/restrictuser"
+        android:paddingLeft="15dp"
+        android:textColor="@android:color/background_dark"
+
+        android:textColorHint="@android:color/darker_gray"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/activity_horizontal_margin" />
+
+    <EditText
+        android:id="@+id/passwordLoginTextBox"
+        style="@android:style/Animation.Toast"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/usernameLoginTextBox"
+        android:layout_gravity="center_horizontal"
+        android:autoText="true"
+        android:background="@drawable/username"
+        android:drawableRight="@android:drawable/ic_lock_lock"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:maxLength="@integer/password"
+        android:paddingLeft="15dp"
+        android:password="true"
+        android:textColor="@android:color/darker_gray"
+        android:textColorHint="@android:color/darker_gray"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/activity_horizontal_margin" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/reset"
+        android:layout_alignRight="@+id/reset"
+        android:layout_below="@+id/passwordLoginTextBox"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/button"
+
+        android:singleLine="false"
+        android:text="Login"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="@dimen/abc_action_bar_subtitle_text_size"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/createAccountbtnLogin"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="85dp"
+
+        android:background="@drawable/button"
+        android:text="Patient Registration"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="@dimen/abc_action_bar_subtitle_text_size"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/reset"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+
+        android:layout_alignEnd="@+id/createAccountbtnLogin"
+        android:layout_alignRight="@+id/createAccountbtnLogin"
+        android:layout_below="@+id/loginBtn"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        android:text="Forgotten your password ?"
+        android:textColor="@android:color/background_light"
+        android:textSize="@dimen/activity_vertical_margin"
+        android:visibility="visible"
+        android:textStyle="normal|italic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Heath Field Surgery"
+        android:id="@+id/textView"
+        android:textSize="@dimen/heath"
+        android:textStyle="bold|italic"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/background_light"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textClock2"
+        android:textColor="@android:color/background_light"
+        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/createAccountbtnLogin"
+        android:layout_centerHorizontal="true"
+        android:textStyle="italic" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/background_light"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"></RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Patients"
+            android:id="@+id/textView2"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold|italic"
+            android:textColor="@android:color/background_light" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/background_light"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/relativeLayout"
+            android:layout_alignStart="@+id/relativeLayout"
+            android:layout_marginBottom="42dp"></RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HFS"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="7dp"
+            android:textSize="@dimen/heath"
+            android:textStyle="bold|italic"
+            android:textColor="@android:color/background_light" />
+    </RelativeLayout>
+</RelativeLayout>

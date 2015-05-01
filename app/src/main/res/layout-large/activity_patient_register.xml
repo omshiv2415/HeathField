@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    tools:context=".UserInput">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@android:color/holo_blue_light">
+
+        <EditText
+            android:id="@+id/Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/LastName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/LastName"
+            android:layout_below="@+id/linearLayout"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:ems="12"
+            android:focusable="true"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:maxLength="30"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/activity_vertical_margin" />
+
+        <EditText
+            android:id="@+id/DateofBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/LastName"
+            android:layout_alignStart="@+id/LastName"
+            android:layout_below="@+id/LastName"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:drawableRight="@android:drawable/ic_menu_my_calendar"
+            android:editable="false"
+            android:ems="12"
+            android:hint="Date of Birth     DD/MM/YYYY"
+            android:inputType="date"
+            android:longClickable="true"
+            android:maxLength="10"
+            android:textColor="@android:color/darker_gray"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/activity_horizontal_margin" />
+
+        <Button
+            android:id="@+id/SignUpButton"
+            style="@android:style/ButtonBar"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/Password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/button"
+            android:clickable="true"
+            android:text="Register"
+            android:textSize="@dimen/abc_action_bar_subtitle_text_size"
+            android:textColor="@android:color/holo_blue_dark" />
+
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/CreateID"
+            android:layout_alignLeft="@+id/CreateID"
+            android:layout_alignRight="@+id/CreateID"
+            android:layout_alignStart="@+id/CreateID"
+            android:layout_below="@+id/CreateID"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="2dp"
+            android:drawableRight="@android:drawable/ic_lock_idle_lock"
+            android:ems="12"
+            android:hint="Password(7-21 Character)"
+            android:inputType="textPassword"
+
+            android:maxLength="21"
+            android:selectAllOnFocus="false"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/darker_gray"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/activity_vertical_margin" />
+
+
+        <EditText
+            android:id="@+id/EmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/PatientPhone"
+            android:layout_alignLeft="@+id/DateofBirth"
+            android:layout_alignRight="@+id/PatientPhone"
+            android:layout_alignStart="@+id/DateofBirth"
+            android:layout_below="@+id/gender"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="5dp"
+            android:ems="12"
+            android:hint="abcd@yahoo.co.uk"
+            android:inputType="textEmailAddress"
+            android:maxLength="36"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/activity_vertical_margin" />
+
+        <EditText
+            android:id="@+id/CreateID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/DateofBirth"
+            android:layout_alignLeft="@+id/PatientPhone"
+            android:layout_alignRight="@+id/DateofBirth"
+            android:layout_alignStart="@+id/PatientPhone"
+            android:layout_below="@+id/PatientPhone"
+
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:ems="12"
+            android:hint="Patient Login ID ( 6-12 Character )"
+            android:inputType="textPersonName"
+            android:maxLength="12"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/activity_vertical_margin" />
+
+        <EditText
+            android:id="@+id/LastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Name"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:ems="12"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:maxLength="30"
+            android:selectAllOnFocus="true"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/activity_horizontal_margin" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/background_light"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/AllReadyAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SignUpButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="7dp"
+            android:text="Already have an Account ?"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/abc_action_bar_title_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Heath Field Surgery"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/heath"
+            android:textStyle="bold|italic" />
+
+        <Spinner
+            android:id="@+id/gender"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/DateofBirth"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/background_light"
+            android:focusable="true"
+            android:textColor="@android:color/darker_gray"
+            android:spinnerMode="dialog"
+            android:layout_alignRight="@+id/DateofBirth"
+            android:layout_alignEnd="@+id/DateofBirth"
+            android:layout_alignLeft="@+id/DateofBirth"
+            android:layout_alignStart="@+id/DateofBirth"
+             >
+
+        </Spinner>
+
+        <EditText
+            android:id="@+id/PatientPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/DateofBirth"
+            android:layout_alignLeft="@+id/gender"
+            android:layout_alignRight="@+id/DateofBirth"
+            android:layout_alignStart="@+id/gender"
+            android:layout_below="@+id/EmailAddress"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:drawableRight="@android:drawable/ic_menu_call"
+            android:hint="07961279239"
+            android:phoneNumber="true"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/abc_action_bar_title_text_size" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+

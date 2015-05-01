@@ -1,0 +1,228 @@
+<html>
+<head>
+<title>PatientLogin.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(128,128,128); }
+.s3 { color: rgb(106,135,89); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+PatientLogin.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">appointment.booking.com.patient</span><span class="s0">;</span><span class="s1"> 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span><span class="s1"> 
+<a name="l4"><span class="ln">4    </span></a></span><span class="s0">import </span><span class="s1">android.app.AlertDialog</span><span class="s0">;</span><span class="s1"> 
+<a name="l5"><span class="ln">5    </span></a></span><span class="s0">import </span><span class="s1">android.content.Context</span><span class="s0">;</span><span class="s1"> 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import </span><span class="s1">android.content.DialogInterface</span><span class="s0">;</span><span class="s1"> 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span><span class="s1"> 
+<a name="l8"><span class="ln">8    </span></a></span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+<a name="l9"><span class="ln">9    </span></a></span><span class="s0">import </span><span class="s1">android.view.Menu</span><span class="s0">;</span><span class="s1"> 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s0">import </span><span class="s1">android.view.MenuItem</span><span class="s0">;</span><span class="s1"> 
+<a name="l11"><span class="ln">11   </span></a></span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span><span class="s1"> 
+<a name="l12"><span class="ln">12   </span></a></span><span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span><span class="s1"> 
+<a name="l13"><span class="ln">13   </span></a></span><span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s0">;</span><span class="s1"> 
+<a name="l14"><span class="ln">14   </span></a></span><span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span><span class="s1"> 
+<a name="l15"><span class="ln">15   </span></a> 
+<a name="l16"><span class="ln">16   </span></a></span><span class="s0">import </span><span class="s1">com.parse.LogInCallback</span><span class="s0">;</span><span class="s1"> 
+<a name="l17"><span class="ln">17   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParseException</span><span class="s0">;</span><span class="s1"> 
+<a name="l18"><span class="ln">18   </span></a></span><span class="s0">import </span><span class="s1">com.parse.ParseUser</span><span class="s0">;</span><span class="s1"> 
+<a name="l19"><span class="ln">19   </span></a> 
+<a name="l20"><span class="ln">20   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/heathfield/PasswordReset.java.html">appointment.booking.com.heathfield.PasswordReset</a>;</span><span class="s1"> 
+<a name="l21"><span class="ln">21   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/heathfield/R.java.html">appointment.booking.com.heathfield.R</a>;</span><span class="s1"> 
+<a name="l22"><span class="ln">22   </span></a></span><span class="s0">import <a href="../../../../appointment/booking/com/support/ConnectionDetector.java.html">appointment.booking.com.support.ConnectionDetector</a>;</span><span class="s1"> 
+<a name="l23"><span class="ln">23   </span></a> 
+<a name="l24"><span class="ln">24   </span></a></span><span class="s0">public class </span><span class="s1">PatientLogin </span><span class="s0">extends </span><span class="s1">Activity { 
+<a name="l25"><span class="ln">25   </span></a>    Boolean isInternetPresent = </span><span class="s0">true;</span><span class="s1"> 
+<a name="l26"><span class="ln">26   </span></a>    <a href="../../../../appointment/booking/com/support/ConnectionDetector.java.html">ConnectionDetector</a> cd</span><span class="s0">;</span><span class="s1"> 
+<a name="l27"><span class="ln">27   </span></a>    </span><span class="s0">protected </span><span class="s1">EditText mUsername</span><span class="s0">;</span><span class="s1"> 
+<a name="l28"><span class="ln">28   </span></a>    </span><span class="s0">protected </span><span class="s1">EditText mPassword</span><span class="s0">;</span><span class="s1"> 
+<a name="l29"><span class="ln">29   </span></a>    </span><span class="s0">protected </span><span class="s1">Button mLoginBtn</span><span class="s0">;</span><span class="s1"> 
+<a name="l30"><span class="ln">30   </span></a>    </span><span class="s0">protected </span><span class="s1">Button mCreateAccountBtn</span><span class="s0">;</span><span class="s1"> 
+<a name="l31"><span class="ln">31   </span></a>    </span><span class="s0">protected </span><span class="s1">Toast toast</span><span class="s0">;</span><span class="s1"> 
+<a name="l32"><span class="ln">32   </span></a>    </span><span class="s0">protected </span><span class="s1">Button PassReset</span><span class="s0">;</span><span class="s1"> 
+<a name="l33"><span class="ln">33   </span></a>    @Override 
+<a name="l34"><span class="ln">34   </span></a>    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+<a name="l35"><span class="ln">35   </span></a>        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+<a name="l36"><span class="ln">36   </span></a>        setContentView(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.layout</a>.activity_patient_login)</span><span class="s0">;</span><span class="s1"> 
+<a name="l37"><span class="ln">37   </span></a>        cd = </span><span class="s0">new <a href="../../../../appointment/booking/com/support/ConnectionDetector.java.html">ConnectionDetector</a></span><span class="s1">(getApplicationContext())</span><span class="s0">;</span><span class="s1"> 
+<a name="l38"><span class="ln">38   </span></a>        </span><span class="s2">//initialize</span><span class="s1"> 
+<a name="l39"><span class="ln">39   </span></a>        mUsername = (EditText) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.usernameLoginTextBox)</span><span class="s0">;</span><span class="s1"> 
+<a name="l40"><span class="ln">40   </span></a>        mPassword = (EditText) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.passwordLoginTextBox)</span><span class="s0">;</span><span class="s1"> 
+<a name="l41"><span class="ln">41   </span></a>        mLoginBtn = (Button) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.loginBtn)</span><span class="s0">;</span><span class="s1"> 
+<a name="l42"><span class="ln">42   </span></a>        mCreateAccountBtn = (Button) findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.createAccountbtnLogin)</span><span class="s0">;</span><span class="s1"> 
+<a name="l43"><span class="ln">43   </span></a>        PassReset = (Button)findViewById(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.reset)</span><span class="s0">;</span><span class="s1"> 
+<a name="l44"><span class="ln">44   </span></a>      </span><span class="s2">//  mUsername.setCompoundDrawables(null, null, getResources().getDrawable(R.drawable.user), null);</span><span class="s1"> 
+<a name="l45"><span class="ln">45   </span></a> 
+<a name="l46"><span class="ln">46   </span></a>        mLoginBtn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+<a name="l47"><span class="ln">47   </span></a> 
+<a name="l48"><span class="ln">48   </span></a> 
+<a name="l49"><span class="ln">49   </span></a>            @Override 
+<a name="l50"><span class="ln">50   </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(View view) { 
+<a name="l51"><span class="ln">51   </span></a>                </span><span class="s2">// flurry implementation when user click login button</span><span class="s1"> 
+<a name="l52"><span class="ln">52   </span></a> 
+<a name="l53"><span class="ln">53   </span></a>                <a href="../../../../appointment/booking/com/support/ConnectionDetector.java.html">ConnectionDetector</a> cd</span><span class="s0">;</span><span class="s1"> 
+<a name="l54"><span class="ln">54   </span></a>                </span><span class="s2">// creating connection detector class instance</span><span class="s1"> 
+<a name="l55"><span class="ln">55   </span></a>                cd = </span><span class="s0">new <a href="../../../../appointment/booking/com/support/ConnectionDetector.java.html">ConnectionDetector</a></span><span class="s1">(getApplicationContext())</span><span class="s0">;</span><span class="s1"> 
+<a name="l56"><span class="ln">56   </span></a>                </span><span class="s2">// get Internet status</span><span class="s1"> 
+<a name="l57"><span class="ln">57   </span></a>                isInternetPresent = cd.isConnectingToInternet()</span><span class="s0">;</span><span class="s1"> 
+<a name="l58"><span class="ln">58   </span></a>                </span><span class="s2">// check for Internet status</span><span class="s1"> 
+<a name="l59"><span class="ln">59   </span></a> 
+<a name="l60"><span class="ln">60   </span></a>                </span><span class="s0">if </span><span class="s1">(isInternetPresent) { 
+<a name="l61"><span class="ln">61   </span></a> 
+<a name="l62"><span class="ln">62   </span></a>                    </span><span class="s2">// get the user inputs from edit text and convert to string</span><span class="s1"> 
+<a name="l63"><span class="ln">63   </span></a>                    </span><span class="s0">final </span><span class="s1">String username = mUsername.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l64"><span class="ln">64   </span></a>                    String password = mPassword.getText().toString().trim()</span><span class="s0">;</span><span class="s1"> 
+<a name="l65"><span class="ln">65   </span></a> 
+<a name="l66"><span class="ln">66   </span></a> 
+<a name="l67"><span class="ln">67   </span></a>                    mUsername.getText().clear()</span><span class="s0">;</span><span class="s1"> 
+<a name="l68"><span class="ln">68   </span></a>                    mPassword.getText().clear()</span><span class="s0">;</span><span class="s1"> 
+<a name="l69"><span class="ln">69   </span></a> 
+<a name="l70"><span class="ln">70   </span></a> 
+<a name="l71"><span class="ln">71   </span></a> 
+<a name="l72"><span class="ln">72   </span></a> 
+<a name="l73"><span class="ln">73   </span></a> 
+<a name="l74"><span class="ln">74   </span></a> 
+<a name="l75"><span class="ln">75   </span></a>                    ParseUser.logInInBackground(username</span><span class="s0">, </span><span class="s1">password</span><span class="s0">, new </span><span class="s1">LogInCallback() { 
+<a name="l76"><span class="ln">76   </span></a>                        @Override 
+<a name="l77"><span class="ln">77   </span></a>                        </span><span class="s0">public void </span><span class="s1">done(ParseUser parseUser</span><span class="s0">, </span><span class="s1">ParseException e) { 
+<a name="l78"><span class="ln">78   </span></a> 
+<a name="l79"><span class="ln">79   </span></a>                            </span><span class="s0">if </span><span class="s1">(e == </span><span class="s0">null</span><span class="s1">) { 
+<a name="l80"><span class="ln">80   </span></a>                                </span><span class="s2">// success !</span><span class="s1"> 
+<a name="l81"><span class="ln">81   </span></a> 
+<a name="l82"><span class="ln">82   </span></a> 
+<a name="l83"><span class="ln">83   </span></a>                                </span><span class="s2">// Take user to homepage</span><span class="s1"> 
+<a name="l84"><span class="ln">84   </span></a>                                Intent takeUserHome = </span><span class="s0">new </span><span class="s1">Intent(PatientLogin.</span><span class="s0">this, <a href="Patient.java.html">Patient</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l85"><span class="ln">85   </span></a>                                mUsername.getText().clear()</span><span class="s0">;</span><span class="s1"> 
+<a name="l86"><span class="ln">86   </span></a>                                mPassword.getText().clear()</span><span class="s0">;</span><span class="s1"> 
+<a name="l87"><span class="ln">87   </span></a>                                startActivity(takeUserHome)</span><span class="s0">;</span><span class="s1"> 
+<a name="l88"><span class="ln">88   </span></a> 
+<a name="l89"><span class="ln">89   </span></a> 
+<a name="l90"><span class="ln">90   </span></a>                            } </span><span class="s0">else </span><span class="s1">{ 
+<a name="l91"><span class="ln">91   </span></a>                                </span><span class="s2">// sorry there is a login problem</span><span class="s1"> 
+<a name="l92"><span class="ln">92   </span></a>                                AlertDialog.Builder builder = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(PatientLogin.</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l93"><span class="ln">93   </span></a>                                builder.setMessage(e.getMessage())</span><span class="s0">;</span><span class="s1"> 
+<a name="l94"><span class="ln">94   </span></a>                                builder.setTitle(</span><span class="s3">&quot;Sorry&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l95"><span class="ln">95   </span></a>                                builder.setPositiveButton(</span><span class="s3">&quot;OK&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() { 
+<a name="l96"><span class="ln">96   </span></a>                                    @Override 
+<a name="l97"><span class="ln">97   </span></a>                                    </span><span class="s0">public void </span><span class="s1">onClick(DialogInterface dialogInterface</span><span class="s0">, int </span><span class="s1">i) { 
+<a name="l98"><span class="ln">98   </span></a> 
+<a name="l99"><span class="ln">99   </span></a>                                    } 
+<a name="l100"><span class="ln">100  </span></a>                                })</span><span class="s0">;</span><span class="s1"> 
+<a name="l101"><span class="ln">101  </span></a>                                AlertDialog dialog = builder.create()</span><span class="s0">;</span><span class="s1"> 
+<a name="l102"><span class="ln">102  </span></a>                                dialog.show()</span><span class="s0">;</span><span class="s1"> 
+<a name="l103"><span class="ln">103  </span></a>                            } 
+<a name="l104"><span class="ln">104  </span></a>                        } 
+<a name="l105"><span class="ln">105  </span></a>                    })</span><span class="s0">;</span><span class="s1"> 
+<a name="l106"><span class="ln">106  </span></a> 
+<a name="l107"><span class="ln">107  </span></a> 
+<a name="l108"><span class="ln">108  </span></a>                } </span><span class="s0">else </span><span class="s1">{ 
+<a name="l109"><span class="ln">109  </span></a>                    </span><span class="s2">// Internet connection is not present</span><span class="s1"> 
+<a name="l110"><span class="ln">110  </span></a>                    </span><span class="s2">// Ask user to connect to Internet</span><span class="s1"> 
+<a name="l111"><span class="ln">111  </span></a>                    showAlertDialog(PatientLogin.</span><span class="s0">this, </span><span class="s3">&quot;No Internet Connection&quot;</span><span class="s0">,</span><span class="s1"> 
+<a name="l112"><span class="ln">112  </span></a>                            </span><span class="s3">&quot;Please check your internet connection.&quot;</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l113"><span class="ln">113  </span></a> 
+<a name="l114"><span class="ln">114  </span></a>                } 
+<a name="l115"><span class="ln">115  </span></a> 
+<a name="l116"><span class="ln">116  </span></a>            } 
+<a name="l117"><span class="ln">117  </span></a>        })</span><span class="s0">;</span><span class="s1"> 
+<a name="l118"><span class="ln">118  </span></a>        mCreateAccountBtn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+<a name="l119"><span class="ln">119  </span></a> 
+<a name="l120"><span class="ln">120  </span></a> 
+<a name="l121"><span class="ln">121  </span></a>            @Override 
+<a name="l122"><span class="ln">122  </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(View view) { 
+<a name="l123"><span class="ln">123  </span></a> 
+<a name="l124"><span class="ln">124  </span></a> 
+<a name="l125"><span class="ln">125  </span></a>                <a href="../../../../appointment/booking/com/support/ConnectionDetector.java.html">ConnectionDetector</a> cd</span><span class="s0">;</span><span class="s1"> 
+<a name="l126"><span class="ln">126  </span></a>                </span><span class="s2">// creating connection detector class instance</span><span class="s1"> 
+<a name="l127"><span class="ln">127  </span></a>                cd = </span><span class="s0">new <a href="../../../../appointment/booking/com/support/ConnectionDetector.java.html">ConnectionDetector</a></span><span class="s1">(getApplicationContext())</span><span class="s0">;</span><span class="s1"> 
+<a name="l128"><span class="ln">128  </span></a>                </span><span class="s2">// get Internet status</span><span class="s1"> 
+<a name="l129"><span class="ln">129  </span></a>                isInternetPresent = cd.isConnectingToInternet()</span><span class="s0">;</span><span class="s1"> 
+<a name="l130"><span class="ln">130  </span></a>                </span><span class="s2">// check for Internet status</span><span class="s1"> 
+<a name="l131"><span class="ln">131  </span></a>                </span><span class="s0">if </span><span class="s1">(isInternetPresent) { 
+<a name="l132"><span class="ln">132  </span></a> 
+<a name="l133"><span class="ln">133  </span></a>                    Intent takeUserRegister = </span><span class="s0">new </span><span class="s1">Intent(PatientLogin.</span><span class="s0">this, <a href="PatientRegister.java.html">PatientRegister</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l134"><span class="ln">134  </span></a>                    startActivity(takeUserRegister)</span><span class="s0">;</span><span class="s1"> 
+<a name="l135"><span class="ln">135  </span></a>                    PatientLogin.</span><span class="s0">this</span><span class="s1">.finish()</span><span class="s0">;</span><span class="s1"> 
+<a name="l136"><span class="ln">136  </span></a> 
+<a name="l137"><span class="ln">137  </span></a>                } </span><span class="s0">else </span><span class="s1">{ 
+<a name="l138"><span class="ln">138  </span></a>                    </span><span class="s2">// Internet connection is not present</span><span class="s1"> 
+<a name="l139"><span class="ln">139  </span></a>                    </span><span class="s2">// Ask user to connect to Internet</span><span class="s1"> 
+<a name="l140"><span class="ln">140  </span></a>                    showAlertDialog(PatientLogin.</span><span class="s0">this, </span><span class="s3">&quot;No Internet Connection&quot;</span><span class="s0">,</span><span class="s1"> 
+<a name="l141"><span class="ln">141  </span></a>                            </span><span class="s3">&quot;Please check your internet connection.&quot;</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l142"><span class="ln">142  </span></a> 
+<a name="l143"><span class="ln">143  </span></a> 
+<a name="l144"><span class="ln">144  </span></a>                } 
+<a name="l145"><span class="ln">145  </span></a>            } 
+<a name="l146"><span class="ln">146  </span></a> 
+<a name="l147"><span class="ln">147  </span></a> 
+<a name="l148"><span class="ln">148  </span></a>        })</span><span class="s0">;</span><span class="s1"> 
+<a name="l149"><span class="ln">149  </span></a> 
+<a name="l150"><span class="ln">150  </span></a> 
+<a name="l151"><span class="ln">151  </span></a>        PassReset.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+<a name="l152"><span class="ln">152  </span></a>            @Override 
+<a name="l153"><span class="ln">153  </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(View view) { 
+<a name="l154"><span class="ln">154  </span></a>                Intent takeUserReset = </span><span class="s0">new </span><span class="s1">Intent(PatientLogin.</span><span class="s0">this, <a href="../../../../appointment/booking/com/heathfield/PasswordReset.java.html">PasswordReset</a></span><span class="s1">.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l155"><span class="ln">155  </span></a>                startActivity(takeUserReset)</span><span class="s0">;</span><span class="s1"> 
+<a name="l156"><span class="ln">156  </span></a>               PatientLogin.</span><span class="s0">this</span><span class="s1">.finish()</span><span class="s0">;</span><span class="s1"> 
+<a name="l157"><span class="ln">157  </span></a>            } 
+<a name="l158"><span class="ln">158  </span></a>        })</span><span class="s0">;</span><span class="s1"> 
+<a name="l159"><span class="ln">159  </span></a> 
+<a name="l160"><span class="ln">160  </span></a>    } 
+<a name="l161"><span class="ln">161  </span></a> 
+<a name="l162"><span class="ln">162  </span></a> 
+<a name="l163"><span class="ln">163  </span></a>    </span><span class="s0">public void </span><span class="s1">showAlertDialog(Context context</span><span class="s0">, </span><span class="s1">String title</span><span class="s0">, </span><span class="s1">String message</span><span class="s0">, </span><span class="s1">Boolean status) { 
+<a name="l164"><span class="ln">164  </span></a> 
+<a name="l165"><span class="ln">165  </span></a> 
+<a name="l166"><span class="ln">166  </span></a>        AlertDialog alertDialog = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(context).create()</span><span class="s0">;</span><span class="s1"> 
+<a name="l167"><span class="ln">167  </span></a> 
+<a name="l168"><span class="ln">168  </span></a>        </span><span class="s2">// Setting Dialog Title</span><span class="s1"> 
+<a name="l169"><span class="ln">169  </span></a>        alertDialog.setTitle(title)</span><span class="s0">;</span><span class="s1"> 
+<a name="l170"><span class="ln">170  </span></a> 
+<a name="l171"><span class="ln">171  </span></a>        </span><span class="s2">// Setting Dialog Message</span><span class="s1"> 
+<a name="l172"><span class="ln">172  </span></a>        alertDialog.setMessage(message)</span><span class="s0">;</span><span class="s1"> 
+<a name="l173"><span class="ln">173  </span></a> 
+<a name="l174"><span class="ln">174  </span></a>        </span><span class="s2">// Setting alert dialog icon</span><span class="s1"> 
+<a name="l175"><span class="ln">175  </span></a>        alertDialog.setIcon((status) ? <a href="../../../../appointment/booking/com/heathfield/R.java.html">R.drawable</a>.success : <a href="../../../../appointment/booking/com/heathfield/R.java.html">R.drawable</a>.error)</span><span class="s0">;</span><span class="s1"> 
+<a name="l176"><span class="ln">176  </span></a> 
+<a name="l177"><span class="ln">177  </span></a>        </span><span class="s2">// Setting OK Button</span><span class="s1"> 
+<a name="l178"><span class="ln">178  </span></a>        alertDialog.setButton(</span><span class="s3">&quot;OK&quot;</span><span class="s0">, new </span><span class="s1">DialogInterface.OnClickListener() { 
+<a name="l179"><span class="ln">179  </span></a>            </span><span class="s0">public void </span><span class="s1">onClick(DialogInterface dialog</span><span class="s0">, int </span><span class="s1">which) { 
+<a name="l180"><span class="ln">180  </span></a>            } 
+<a name="l181"><span class="ln">181  </span></a>        })</span><span class="s0">;</span><span class="s1"> 
+<a name="l182"><span class="ln">182  </span></a>        </span><span class="s2">// Showing Alert Message</span><span class="s1"> 
+<a name="l183"><span class="ln">183  </span></a>        alertDialog.show()</span><span class="s0">;</span><span class="s1"> 
+<a name="l184"><span class="ln">184  </span></a> 
+<a name="l185"><span class="ln">185  </span></a>    } 
+<a name="l186"><span class="ln">186  </span></a> 
+<a name="l187"><span class="ln">187  </span></a>    @Override 
+<a name="l188"><span class="ln">188  </span></a>    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+<a name="l189"><span class="ln">189  </span></a>        </span><span class="s2">// Inflate the menu; this adds items to the action bar if it is present.</span><span class="s1"> 
+<a name="l190"><span class="ln">190  </span></a>        getMenuInflater().inflate(<a href="../../../../appointment/booking/com/heathfield/R.java.html">R.menu</a>.patient_login</span><span class="s0">, </span><span class="s1">menu)</span><span class="s0">;</span><span class="s1"> 
+<a name="l191"><span class="ln">191  </span></a>        </span><span class="s0">return true;</span><span class="s1"> 
+<a name="l192"><span class="ln">192  </span></a>    } 
+<a name="l193"><span class="ln">193  </span></a> 
+<a name="l194"><span class="ln">194  </span></a>    @Override 
+<a name="l195"><span class="ln">195  </span></a>    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+<a name="l196"><span class="ln">196  </span></a>        </span><span class="s2">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+<a name="l197"><span class="ln">197  </span></a>        </span><span class="s2">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+<a name="l198"><span class="ln">198  </span></a>        </span><span class="s2">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+<a name="l199"><span class="ln">199  </span></a>        </span><span class="s0">int </span><span class="s1">id = item.getItemId()</span><span class="s0">;</span><span class="s1"> 
+<a name="l200"><span class="ln">200  </span></a>        </span><span class="s0">if </span><span class="s1">(id == <a href="../../../../appointment/booking/com/heathfield/R.java.html">R.id</a>.action_settings) { 
+<a name="l201"><span class="ln">201  </span></a>            </span><span class="s0">return true;</span><span class="s1"> 
+<a name="l202"><span class="ln">202  </span></a>        } 
+<a name="l203"><span class="ln">203  </span></a>        </span><span class="s0">return super</span><span class="s1">.onOptionsItemSelected(item)</span><span class="s0">;</span><span class="s1"> 
+<a name="l204"><span class="ln">204  </span></a>    } 
+<a name="l205"><span class="ln">205  </span></a>} 
+<a name="l206"><span class="ln">206  </span></a></span></pre>
+</body>
+</html>

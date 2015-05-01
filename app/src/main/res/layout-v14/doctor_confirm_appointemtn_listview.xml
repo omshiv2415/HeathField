@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+
+
+    android:background="@android:drawable/dialog_holo_light_frame">
+
+    <TextView
+        android:id="@+id/ranklabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Patient ID                  :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Patient_id"
+        android:layout_width="100dp"
+
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Patient_name"
+
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@+id/doctor"
+        android:layout_toRightOf="@+id/doctor"
+        android:text="123456"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/countrylabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ranklabel"
+        android:layout_marginLeft="5dp"
+        android:text="Patient Name           :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Patient_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Patient_id"
+        android:layout_alignStart="@+id/Patient_id"
+        android:layout_alignTop="@+id/countrylabel"
+        android:text="Viral"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/populationlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_alignTop="@+id/Appointment"
+        android:text="Appointment            :"
+        android:layout_marginBottom="10dp"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Docotorid"
+
+        android:layout_alignStart="@+id/Docotorid"
+        android:layout_below="@+id/Docotorid"
+        android:text="abc"
+        android:textColor="@android:color/background_dark" />
+
+
+    <TextView
+        android:id="@+id/Pdob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/countrylabel"
+        android:layout_alignRight="@+id/countrylabel"
+
+        android:layout_below="@+id/countrylabel"
+        android:text="Date of Birth             :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/patiendob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Patient_name"
+        android:layout_alignStart="@+id/Patient_name"
+        android:layout_alignTop="@+id/Pdob"
+        android:text="16/10/1981"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/pcontact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/patientcontact"
+        android:layout_alignEnd="@+id/Pdob"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/Pdob"
+        android:layout_alignTop="@+id/patientcontact"
+        android:layout_marginLeft="5dp"
+        android:text="Contact No               :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/patientcontact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/patiendob"
+        android:layout_alignStart="@+id/patiendob"
+        android:layout_below="@+id/patiendob"
+        android:text="07961279239"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/pcontact"
+        android:layout_alignRight="@+id/pcontact"
+
+        android:layout_below="@+id/pcontact"
+        android:text="E-mail Address        :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/emailaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/patientcontact"
+
+        android:layout_alignStart="@+id/patientcontact"
+        android:layout_alignTop="@+id/email"
+        android:text="omshiv2415@yahoo.co.uk"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/email"
+        android:layout_marginLeft="5dp"
+        android:text="Doctor Name            :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/emailaddress"
+        android:layout_alignStart="@+id/emailaddress"
+        android:layout_alignTop="@+id/doctor"
+        android:text="DR Jamal"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/email"
+        android:layout_alignStart="@+id/email"
+        android:layout_below="@+id/doctor"
+        android:text="Doctor ID                  :"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/Docotorid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Doctor_name"
+        android:layout_alignStart="@+id/Doctor_name"
+        android:layout_alignTop="@+id/textView3"
+        android:text="12431"
+        android:textColor="@android:color/background_dark" />
+
+</RelativeLayout>

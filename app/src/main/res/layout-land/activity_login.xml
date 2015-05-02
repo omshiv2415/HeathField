@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp"
+    tools:context=".Login">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light">
+
+        <ImageButton
+            android:id="@+id/Doctor"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/btneffect"
+            android:clickable="true"
+            android:longClickable="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/holo_orange_dark">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@android:color/holo_blue_light"
+                android:gravity="center_vertical|center|center_horizontal"
+                android:text="Heath Field Surgery"
+                android:textColor="@android:color/background_light"
+                android:textSize="@dimen/heath"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/patient"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignEnd="@+id/Doctor"
+            android:layout_alignParentBottom="true"
+
+            android:layout_alignRight="@+id/Doctor"
+            android:layout_marginBottom="45dp"
+            android:background="@drawable/btnpatient"
+            android:clickable="true"
+            android:longClickable="true" />
+
+        <TextView
+            android:id="@+id/Pdob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Doctor"
+            android:layout_centerHorizontal="true"
+            android:text="Doctors"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="@dimen/activity_horizontal_margin"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:text="Patients"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="@dimen/activity_vertical_margin"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

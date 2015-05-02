@@ -54,7 +54,7 @@
             android:inputType="date"
             android:longClickable="true"
             android:maxLength="10"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/background_dark"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/activity_horizontal_margin" />
 
@@ -69,8 +69,8 @@
             android:background="@drawable/button"
             android:clickable="true"
             android:text="Register"
-            android:textSize="@dimen/abc_action_bar_subtitle_text_size"
-            android:textColor="@android:color/holo_blue_dark" />
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="@dimen/abc_action_bar_subtitle_text_size" />
 
 
         <EditText
@@ -207,18 +207,17 @@
             android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_alignEnd="@+id/DateofBirth"
+            android:layout_alignLeft="@+id/DateofBirth"
+            android:layout_alignRight="@+id/DateofBirth"
+            android:layout_alignStart="@+id/DateofBirth"
             android:layout_below="@+id/DateofBirth"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/background_light"
             android:focusable="true"
-            android:textColor="@android:color/darker_gray"
             android:spinnerMode="dialog"
-            android:layout_alignRight="@+id/DateofBirth"
-            android:layout_alignEnd="@+id/DateofBirth"
-            android:layout_alignLeft="@+id/DateofBirth"
-            android:layout_alignStart="@+id/DateofBirth"
-             >
+            android:textColor="@android:color/darker_gray">
 
         </Spinner>
 
@@ -235,6 +234,7 @@
             android:layout_marginTop="2dp"
             android:drawableRight="@android:drawable/ic_menu_call"
             android:hint="07961279239"
+            android:maxLength="11"
             android:phoneNumber="true"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/abc_action_bar_title_text_size" />

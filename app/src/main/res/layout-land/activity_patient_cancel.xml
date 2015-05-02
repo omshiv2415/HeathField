@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/holo_blue_light">
+
+    <ListView
+        android:id="@+id/AppointmentListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/holo_blue_light"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/divider"
+        android:fastScrollEnabled="true"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:listSelector="@android:color/holo_blue_light"
+        android:longClickable="true"
+        android:visibility="visible" />
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="15dp"
+        android:background="@android:color/holo_blue_light">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Cancel Your Appointment"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/abc_action_bar_subtitle_text_size"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+
+        android:layout_alignBottom="@+id/relativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/background_dark"
+        android:orientation="horizontal" />
+
+    <Button
+        android:id="@+id/CancelHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        android:text="App Cancel History" />
+
+    <Button
+        android:id="@+id/BookingHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:text="App Booking History" />
+
+    <TextView
+        android:id="@+id/list_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="147dp"
+        android:background="@android:drawable/alert_light_frame"
+        android:gravity="center"
+        android:text="No Appointments To Cancel"
+        android:textColor="@android:color/background_dark"
+        android:textSize="@dimen/abc_action_bar_subtitle_text_size"
+        android:textStyle="bold|italic"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>

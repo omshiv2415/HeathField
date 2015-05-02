@@ -12,19 +12,12 @@ public class AppParse extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        // getting parse application id and client id
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "rpcplJPWVKUYBUl0r7DOd5lG2eSpKwvxHYb3M9Vm", "vt3kreg6ApoD3LvBFelpU6VEGROj5IRpOOe4Q3Cr");
         PushService.setDefaultPushCallback(this, Login.class);
-        // Enable Crash Reporting
-        // ParseCrashReporting.enable(this);
-        // ParseUser.enableAutomaticUser();
-        // ParseACL defaultACL = new ParseACL();
-        // If you would like all objects to be private by default, remove this line.
-        //defaultACL.setPublicReadAccess(true);
-        //ParseACL.setDefaultACL(defaultACL, true);
-
 
     }
 
 }
+

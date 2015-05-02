@@ -44,13 +44,41 @@ public class Appointment_Booking_History extends Activity {
 
         // patientname.setText((CharSequence) ParseUser.getCurrentUser().get("Name"));
         new RemoteDataTask().execute();
-        TextView Head = (TextView)findViewById(R.id.textView);
+        TextView Head = (TextView) findViewById(R.id.textView);
         Typeface Heading = Typeface.createFromAsset(getAssets(), "fonts/Sansation_Regular.ttf");
         Head.setTypeface(Heading);
 
     }
     // RemoteDataTask AsyncTask
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.patint_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent takeUserHome = new Intent(Appointment_Booking_History.this, Patient.class);
+        startActivity(takeUserHome);
+        Appointment_Booking_History.this.finish();
+
+
+    }
 
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
         @Override
@@ -72,21 +100,21 @@ public class Appointment_Booking_History extends Activity {
             // Create the array
             AppBookAndCancelList = new ArrayList<App_Booking_and_cancel_support>();
             try {
-                // Locate the class table named "Country" in Parse.com
+                // Locate the class table named "PatinetBookingHistory" in Parse.com
                 ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                         "PatientBookingHistory");
-                // Locate the column named "ranknum" in Parse.com and order list
+                // Locate the column named "Doctor_Name" in Parse.com and order list
                 // by ascending
                 query.orderByAscending("Doctor_Name");
                 query.whereEqualTo("createdBy", ParseUser.getCurrentUser());
                 ob = query.find();
-                for (ParseObject country : ob) {
+                for (ParseObject BookingHistory : ob) {
                     App_Booking_and_cancel_support map = new App_Booking_and_cancel_support();
-                    map.setDoctor_id((String) country.get("DrID"));
-                    map.setDoctor_Name((String) country.get("DoctorName"));
-                    map.setAppointment_Date(country.get("MyAppointment").toString());
-                    map.setAppointment_number((String) country.get("Appointment_No"));
-                    map.setAppointment_Created(String.valueOf(country.getCreatedAt()));
+                    map.setDoctor_id((String) BookingHistory.get("DrID"));
+                    map.setDoctor_Name((String) BookingHistory.get("DoctorName"));
+                    map.setAppointment_Date(BookingHistory.get("MyAppointment").toString());
+                    map.setAppointment_number((String) BookingHistory.get("Appointment_No"));
+                    map.setAppointment_Created(String.valueOf(BookingHistory.getCreatedAt()));
                     AppBookAndCancelList.add(map);
                 }
             } catch (ParseException e) {
@@ -98,7 +126,7 @@ public class Appointment_Booking_History extends Activity {
 
         @Override
         protected void onPostExecute(Void result) {
-            TextView noApp = (TextView)findViewById(R.id.empty_history);
+            TextView noApp = (TextView) findViewById(R.id.empty_history);
 
 
             Typeface Heading = Typeface.createFromAsset(getAssets(), "fonts/Sansation_Regular.ttf");
@@ -111,11 +139,11 @@ public class Appointment_Booking_History extends Activity {
             adapter = new Cancel_History_ListViewAdapter(Appointment_Booking_History.this,
                     AppBookAndCancelList);
             // Binds the Adapter to the ListView
-            if(adapter.getCount()!=0){
+            if (adapter.getCount() != 0) {
                 noApp.setVisibility(View.INVISIBLE);
                 listview.setAdapter(adapter);
 
-            }else{
+            } else {
                 Toast.makeText(Appointment_Booking_History.this, "No Appointments Booking History", Toast.LENGTH_SHORT).show();
                 noApp.setVisibility(View.VISIBLE);
 
@@ -123,33 +151,5 @@ public class Appointment_Booking_History extends Activity {
             // Close the progressdialog
             mProgressDialog.dismiss();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.patint_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    @Override
-    public void onBackPressed() {
-
-        Intent takeUserHome = new Intent(Appointment_Booking_History.this, Patient.class);
-        startActivity(takeUserHome);
-        Appointment_Booking_History.this.finish();
-
-
     }
 }

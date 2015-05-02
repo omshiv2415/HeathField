@@ -40,86 +40,13 @@ public class Confirm_Appointment extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm__appointment);
         new RemoteDataTask().execute();
-        TextView head = (TextView)findViewById(R.id.textView);
-        TextView empty = (TextView)findViewById(R.id.noAppointments);
+        TextView head = (TextView) findViewById(R.id.textView);
+        TextView empty = (TextView) findViewById(R.id.noAppointments);
         Typeface Heading = Typeface.createFromAsset(getAssets(), "fonts/Sansation_Regular.ttf");
         head.setTypeface(Heading);
         head.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         empty.setTypeface(Heading);
         empty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-        
-    }
-
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Create a progressdialog
-            mProgressDialog = new ProgressDialog(Confirm_Appointment.this);
-            // Set progressdialog title
-            mProgressDialog.setTitle("Prescription");
-            // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.setIndeterminate(false);
-            // Show progressdialog
-            mProgressDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // Create the array
-            AppointmentConfirmList = new ArrayList<Doctor_ConfirmAppointment_support>();
-            try {
-                // Locate the class table named "Country" in Parse.com
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                        "PatientAppointmentRequest");
-                // query.whereEqualTo("createdBy",  ParseUser.getCurrentUser());
-
-                query.whereEqualTo("DrName", ParseUser.getCurrentUser().get("Name"));
-
-
-
-                ob = query.find();
-                for (ParseObject Prescription_Items : ob) {
-                    Doctor_ConfirmAppointment_support map = new Doctor_ConfirmAppointment_support();
-                    map.setPatient_Id((String) Prescription_Items.get("RequestedId"));
-                    map.setPatient_Name((String) Prescription_Items.get("PatientName"));
-                    map.setDate_of_Birth((String) Prescription_Items.get("PatientDob"));
-                    map.setAppointment_Date((String) Prescription_Items.get("RequestedAppointment"));
-                    map.setDoctorname((String) Prescription_Items.get("DrName"));
-                    map.setDocId((String) Prescription_Items.get("DoctorID"));
-                    map.setPatientEmail((String) Prescription_Items.get("RequestedEmail"));
-                    map.setPatientContactNo((String) Prescription_Items.get("PatientPhone"));
-                    AppointmentConfirmList.add(map);
-                }
-            } catch (ParseException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            TextView noApp = (TextView)findViewById(R.id.noAppointments);
-            // Locate the listview in activity_booking_appointmenting_appointment.xml
-            listview = (ListView) findViewById(R.id.ConfirmListView);
-            // Pass the results into Booking_ListViewAdapter.java
-            adapter = new Doctor_ConfirmAppointment_ListViewAdapter(Confirm_Appointment.this,
-                    AppointmentConfirmList);
-            // Binds the Adapter to the ListView
-            if(adapter.getCount()!=0){
-                listview.setAdapter(adapter);
-                noApp.setVisibility(View.GONE);
-            }else{
-                Toast.makeText(Confirm_Appointment.this, "No Appointments Requested", Toast.LENGTH_SHORT).show();
-                noApp.setVisibility(View.VISIBLE);
-
-            }
-            // Close the progressdialog
-            mProgressDialog.dismiss();
-        }
-
 
     }
 
@@ -146,6 +73,7 @@ public class Confirm_Appointment extends Activity {
         alertDialog.show();
 
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -161,6 +89,78 @@ public class Confirm_Appointment extends Activity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+
+
+    }
+
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Create a progressdialog
+            mProgressDialog = new ProgressDialog(Confirm_Appointment.this);
+            // Set progressdialog title
+            mProgressDialog.setTitle("Prescription");
+            // Set progressdialog message
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setIndeterminate(false);
+            // Show progressdialog
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // Create the array
+            AppointmentConfirmList = new ArrayList<Doctor_ConfirmAppointment_support>();
+            try {
+                // Locate the class table named "PatientAppointmentRequest" in Parse.com
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                        "PatientAppointmentRequest");
+                // Locate the column named "DrName" in Parse.com and getting appointment to
+                // Particular doctor
+                query.whereEqualTo("DrName", ParseUser.getCurrentUser().get("Name"));
+
+
+                ob = query.find();
+                for (ParseObject Prescription_Items : ob) {
+                    Doctor_ConfirmAppointment_support map = new Doctor_ConfirmAppointment_support();
+                    map.setPatient_Id((String) Prescription_Items.get("RequestedId"));
+                    map.setPatient_Name((String) Prescription_Items.get("PatientName"));
+                    map.setDate_of_Birth((String) Prescription_Items.get("PatientDob"));
+                    map.setAppointment_Date((String) Prescription_Items.get("RequestedAppointment"));
+                    map.setDoctorname((String) Prescription_Items.get("DrName"));
+                    map.setDocId((String) Prescription_Items.get("DoctorID"));
+                    map.setPatientEmail((String) Prescription_Items.get("RequestedEmail"));
+                    map.setPatientContactNo((String) Prescription_Items.get("PatientPhone"));
+                    AppointmentConfirmList.add(map);
+                }
+            } catch (ParseException e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            TextView noApp = (TextView) findViewById(R.id.noAppointments);
+            // Locate the listview in activity_booking_appointmenting_appointment.xml
+            listview = (ListView) findViewById(R.id.ConfirmListView);
+            // Pass the results into Booking_ListViewAdapter.java
+            adapter = new Doctor_ConfirmAppointment_ListViewAdapter(Confirm_Appointment.this,
+                    AppointmentConfirmList);
+            // Binds the Adapter to the ListView
+            if (adapter.getCount() != 0) {
+                listview.setAdapter(adapter);
+                noApp.setVisibility(View.GONE);
+            } else {
+                Toast.makeText(Confirm_Appointment.this, "No Appointments Requested", Toast.LENGTH_SHORT).show();
+                noApp.setVisibility(View.VISIBLE);
+
+            }
+            // Close the progressdialog
+            mProgressDialog.dismiss();
+        }
 
 
     }

@@ -13,7 +13,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -44,84 +43,13 @@ public class Doctor_Appointments extends Activity {
 
         new RemoteDataTask().execute();
 
-        TextView head = (TextView)findViewById(R.id.textView);
-        TextView empty = (TextView)findViewById(R.id.NoDocApp);
+        TextView head = (TextView) findViewById(R.id.textView);
+        TextView empty = (TextView) findViewById(R.id.NoDocApp);
         Typeface Heading = Typeface.createFromAsset(getAssets(), "fonts/Sansation_Regular.ttf");
         head.setTypeface(Heading);
         head.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         empty.setTypeface(Heading);
         empty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-
-
-    }
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Create a progressdialog
-            mProgressDialog = new ProgressDialog(Doctor_Appointments.this);
-            // Set progressdialog title
-            mProgressDialog.setTitle("Please wait for appointments");
-            // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.setIndeterminate(false);
-            // Show progressdialog
-            mProgressDialog.show();
-        }
-        @Override
-        protected Void doInBackground(Void... params) {
-            // Create the array
-            DoctorHeathFieldSurgery = new ArrayList<Doctor_support>();
-            try {
-                // Locate the class table named "Country" in Parse.com
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                        "DoctorView");
-                // query.whereEqualTo("createdBy",  ParseUser.getCurrentUser());
-                query.whereEqualTo("DoctorName", ParseUser.getCurrentUser().get("Name"));
-
-                ob = query.find();
-                for (ParseObject DoctorViewAppointment : ob) {
-                    Doctor_support map = new Doctor_support();
-                    map.setPatient_Id((String) DoctorViewAppointment.get("PatientID"));
-                    map.setPatient_Name((String) DoctorViewAppointment.get("PatientName"));
-                    map.setDate_of_Birth((String) DoctorViewAppointment.get("Patient_DOB"));
-                    map.setAppointment_Date((String) DoctorViewAppointment.get("MyAppointment"));
-                    map.setDoctorname((String) DoctorViewAppointment.get("DoctorName"));
-                    map.setPatientContactNo((String) DoctorViewAppointment.get("Patient_ContactNo"));
-                    map.setPatientEmail((String) DoctorViewAppointment.get("Patient_Email"));
-                    map.setAppointmentNo((String) DoctorViewAppointment.get("Appointment_No"));
-                    map.setDoctorId((String) DoctorViewAppointment.get("DrID"));
-                    DoctorHeathFieldSurgery.add(map);
-                }
-            } catch (ParseException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            TextView noApp = (TextView)findViewById(R.id.NoDocApp);
-            Typeface Heading = Typeface.createFromAsset(getAssets(), "fonts/Sansation_Regular.ttf");
-            noApp.setTypeface(Heading);
-            // Locate the listview in activity_booking_appointment.xmlappointment.xml
-            listview = (ListView) findViewById(R.id.DoctorListView);
-            // Pass the results into Booking_ListViewAdapter.java
-            adapter = new Doctor_ListViewAdapter(Doctor_Appointments.this,
-                    DoctorHeathFieldSurgery);
-            // Binds the Adapter to the ListView
-            if(adapter.getCount()!=0){
-                listview.setAdapter(adapter);
-                noApp.setVisibility(View.GONE);
-            }else{
-                Toast.makeText(Doctor_Appointments.this, "No Appointments Booked", Toast.LENGTH_SHORT).show();
-                noApp.setVisibility(View.VISIBLE);
-
-            }
-            // Close the progressdialog
-            mProgressDialog.dismiss();
-        }
 
 
     }
@@ -165,6 +93,79 @@ public class Doctor_Appointments extends Activity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+
+
+    }
+
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Create a progressdialog
+            mProgressDialog = new ProgressDialog(Doctor_Appointments.this);
+            // Set progressdialog title
+            mProgressDialog.setTitle("Please wait for appointments");
+            // Set progressdialog message
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setIndeterminate(false);
+            // Show progressdialog
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // Create the array
+            DoctorHeathFieldSurgery = new ArrayList<Doctor_support>();
+            try {
+                // Locate the class table named "DoctorView" in Parse.com
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                        "DoctorView");
+
+                query.whereEqualTo("DoctorName", ParseUser.getCurrentUser().get("Name"));
+
+                ob = query.find();
+                for (ParseObject DoctorViewAppointment : ob) {
+                    Doctor_support map = new Doctor_support();
+                    map.setPatient_Id((String) DoctorViewAppointment.get("PatientID"));
+                    map.setPatient_Name((String) DoctorViewAppointment.get("PatientName"));
+                    map.setDate_of_Birth((String) DoctorViewAppointment.get("Patient_DOB"));
+                    map.setAppointment_Date((String) DoctorViewAppointment.get("MyAppointment"));
+                    map.setDoctorname((String) DoctorViewAppointment.get("DoctorName"));
+                    map.setPatientContactNo((String) DoctorViewAppointment.get("Patient_ContactNo"));
+                    map.setPatientEmail((String) DoctorViewAppointment.get("Patient_Email"));
+                    map.setAppointmentNo((String) DoctorViewAppointment.get("Appointment_No"));
+                    map.setDoctorId((String) DoctorViewAppointment.get("DrID"));
+                    DoctorHeathFieldSurgery.add(map);
+                }
+            } catch (ParseException e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            TextView noApp = (TextView) findViewById(R.id.NoDocApp);
+            Typeface Heading = Typeface.createFromAsset(getAssets(), "fonts/Sansation_Regular.ttf");
+            noApp.setTypeface(Heading);
+            // Locate the listview in activity_booking_appointment.xmlappointment.xml
+            listview = (ListView) findViewById(R.id.DoctorListView);
+            // Pass the results into Booking_ListViewAdapter.java
+            adapter = new Doctor_ListViewAdapter(Doctor_Appointments.this,
+                    DoctorHeathFieldSurgery);
+            // Binds the Adapter to the ListView
+            if (adapter.getCount() != 0) {
+                listview.setAdapter(adapter);
+                noApp.setVisibility(View.GONE);
+            } else {
+
+                noApp.setVisibility(View.VISIBLE);
+
+            }
+            // Close the progressdialog
+            mProgressDialog.dismiss();
+        }
 
 
     }

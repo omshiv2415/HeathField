@@ -27,26 +27,27 @@ import java.util.List;
 import appointment.booking.com.heathfield.R;
 
 public class BookingAppointment extends Activity {
-	// Declare Variables
-	ListView listview;
-	List<ParseObject> ob;
-	ProgressDialog mProgressDialog;
-	Booking_ListViewAdapter adapter;
+    // Declare Variables
+    ListView listview;
+    List<ParseObject> ob;
+    ProgressDialog mProgressDialog;
+    Booking_ListViewAdapter adapter;
     private TextView NoPatient;
     private TextView Malepatient;
     private TextView FemalePatient;
     private TextView PopularDoctor;
     private TextView TotalNoOfAppointment;
+    private TextView DisplayPatientName;
 
-	private List<App_Booking_and_cancel_support> HeathFieldSurgery = null;
+    private List<App_Booking_and_cancel_support> HeathFieldSurgery = null;
 
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// Get the view from activity_booking_appointment.xmlappointment.xml
-		setContentView(R.layout.activity_booking_appointment);
-		// Execute RemoteDataTask AsyncTask
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Get the view from activity_booking_appointment.xmlappointment.xml
+        setContentView(R.layout.activity_booking_appointment);
+        // Execute RemoteDataTask AsyncTask
         ParseObject appointment = new ParseObject("Doctor");
 
         appointment.refreshInBackground(new RefreshCallback() {
@@ -68,26 +69,27 @@ public class BookingAppointment extends Activity {
                 }
             }
         });
-      new RemoteDataTask().execute();
-      ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-      installation.put("username", ParseUser.getCurrentUser());
-      installation.saveInBackground();
+        new RemoteDataTask().execute();
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("username", ParseUser.getCurrentUser());
+        installation.saveInBackground();
 
         //WebView myWebView = (WebView) findViewById(R.id.webView);
-       // myWebView.loadUrl("http://www.telegraph.co.uk/news/health/news/");
-        NoPatient = (TextView)findViewById(R.id.TotalPatient);
-        Malepatient = (TextView)findViewById(R.id.MalePatient);
-        FemalePatient = (TextView)findViewById(R.id.FemalePat);
-        PopularDoctor = (TextView)findViewById(R.id.popDoc);
-        TotalNoOfAppointment = (TextView)findViewById(R.id.TotalAppointments);
-        TextView head = (TextView)findViewById(R.id.textView);
-        TextView head1 = (TextView)findViewById(R.id.textView2);
-        TextView head2 = (TextView)findViewById(R.id.textView3);
-        TextView head3 = (TextView)findViewById(R.id.textView4);
-        TextView head4 = (TextView)findViewById(R.id.DocPopular);
-        TextView head5 = (TextView)findViewById(R.id.AvailableApp);
-        TextView head6 = (TextView)findViewById(R.id.DocAvailable);
-        TextView head7 = (TextView)findViewById(R.id.Available);
+        // myWebView.loadUrl("http://www.telegraph.co.uk/news/health/news/");
+        NoPatient = (TextView) findViewById(R.id.TotalPatient);
+        Malepatient = (TextView) findViewById(R.id.MalePatient);
+        FemalePatient = (TextView) findViewById(R.id.FemalePat);
+        PopularDoctor = (TextView) findViewById(R.id.popDoc);
+        TotalNoOfAppointment = (TextView) findViewById(R.id.TotalAppointments);
+        DisplayPatientName = (TextView) findViewById(R.id.PatientName);
+        TextView head = (TextView) findViewById(R.id.textView);
+        TextView head1 = (TextView) findViewById(R.id.textView2);
+        TextView head2 = (TextView) findViewById(R.id.textView3);
+        TextView head3 = (TextView) findViewById(R.id.textView4);
+        TextView head4 = (TextView) findViewById(R.id.DocPopular);
+        TextView head5 = (TextView) findViewById(R.id.AvailableApp);
+        TextView head6 = (TextView) findViewById(R.id.DocAvailable);
+        TextView head7 = (TextView) findViewById(R.id.Available);
 
 
         Typeface Heading = Typeface.createFromAsset(getAssets(), "fonts/Sansation_Regular.ttf");
@@ -117,9 +119,11 @@ public class BookingAppointment extends Activity {
         PopularDoctor.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         TotalNoOfAppointment.setTypeface(Heading);
         TotalNoOfAppointment.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        DisplayPatientName.setTypeface(Heading);
+        DisplayPatientName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 
 
-
+        DisplayPatientName.setText((CharSequence) ParseUser.getCurrentUser().get("Name"));
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("Verify", "Patient");
         query.countInBackground(new CountCallback() {
@@ -178,70 +182,8 @@ public class BookingAppointment extends Activity {
             }
         });
 
-	}
-
-	// RemoteDataTask AsyncTask
-	private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			// Create a progressdialog
-			mProgressDialog = new ProgressDialog(BookingAppointment.this);
-			// Set progressdialog title
-			mProgressDialog.setTitle("HeathField Appointment Booking");
-			// Set progressdialog message
-			mProgressDialog.setMessage("Loading...");
-			mProgressDialog.setIndeterminate(false);
-			// Show progressdialog
-			mProgressDialog.show();
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			// Create the array
-			HeathFieldSurgery = new ArrayList<App_Booking_and_cancel_support>();
-			try {
-				// Locate the class table named "Country" in Parse.com
-				ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-						"Doctor");
-				// Locate the column named "ranknum" in Parse.com and order list
-				// by ascending
-				query.orderByAscending("Appointment_Number");
-				ob = query.find();
-				for (ParseObject country : ob) {
-			        App_Booking_and_cancel_support map = new App_Booking_and_cancel_support();
-					map.setDoctor_id((String) country.get("Doctor_ID"));
-					map.setDoctor_Name((String) country.get("Doctor_Name"));
-					map.setAppointment_Date((String) country.get("Appointment_Slot").toString());
-                    map.setAppointment_number((String) country.get("Appointment_Number"));
-					HeathFieldSurgery.add(map);
-				}
-			} catch (ParseException e) {
-				Log.e("Error", e.getMessage());
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-
-
-        @Override
-		protected void onPostExecute(Void result) {
-			// Locate the listview in activity_booking_appointment.xmlappointment.xml
-			listview = (ListView) findViewById(R.id.listview);
-			// Pass the results into Booking_ListViewAdapter.java
-			adapter = new Booking_ListViewAdapter(BookingAppointment.this,
-					HeathFieldSurgery);
-			// Binds the Adapter to the ListView
-			listview.setAdapter(adapter);
-			// Close the progressdialog
-			mProgressDialog.dismiss();
-
-
-		}
-
-
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -252,7 +194,6 @@ public class BookingAppointment extends Activity {
                         ParseUser.logOut();
                         BookingAppointment.this.finish();
 
-
                     }
                 })
                 .setNegativeButton("No", null)
@@ -260,12 +201,14 @@ public class BookingAppointment extends Activity {
 
 
     }
+
     @Override
     public void onStop() {
         super.onStop();
         this.finish();
 
     }
+
     public void showAlertDialog(Context context, String title, String message, Boolean status) {
 
 
@@ -287,6 +230,68 @@ public class BookingAppointment extends Activity {
         });
         // Showing Alert Message
         alertDialog.show();
+
+    }
+
+    // RemoteDataTask AsyncTask
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Create a progressdialog
+            mProgressDialog = new ProgressDialog(BookingAppointment.this);
+            // Set progressdialog title
+            mProgressDialog.setTitle("HeathField Appointment Booking");
+            // Set progressdialog message
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setIndeterminate(false);
+            // Show progressdialog
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // Create the array
+            HeathFieldSurgery = new ArrayList<App_Booking_and_cancel_support>();
+            try {
+                // Locate the class table named "Doctor" in Parse.com
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                        "Doctor");
+                // Locate the column named "Appointment_Number" in Parse.com and order list
+                // by ascending
+                query.orderByAscending("Appointment_Number");
+                ob = query.find();
+                for (ParseObject Appointment : ob) {
+                    App_Booking_and_cancel_support map = new App_Booking_and_cancel_support();
+                    map.setDoctor_id((String) Appointment.get("Doctor_ID"));
+                    map.setDoctor_Name((String) Appointment.get("Doctor_Name"));
+                    map.setAppointment_Date((String) Appointment.get("Appointment_Slot").toString());
+                    map.setAppointment_number((String) Appointment.get("Appointment_Number"));
+                    HeathFieldSurgery.add(map);
+                }
+            } catch (ParseException e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void result) {
+            // Locate the listview in activity_booking_appointment.xmlappointment.xml
+            listview = (ListView) findViewById(R.id.listview);
+            // Pass the results into Booking_ListViewAdapter.java
+            adapter = new Booking_ListViewAdapter(BookingAppointment.this,
+                    HeathFieldSurgery);
+            // Binds the Adapter to the ListView
+            listview.setAdapter(adapter);
+            // Close the progressdialog
+            mProgressDialog.dismiss();
+
+
+        }
+
 
     }
 }

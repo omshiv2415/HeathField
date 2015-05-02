@@ -54,80 +54,6 @@ public class PrescriptionActivity extends Activity {
 
        }
 
-    // RemoteDataTask AsyncTask
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Create a progressdialog
-            mProgressDialog = new ProgressDialog(PrescriptionActivity.this);
-            // Set progressdialog title
-            mProgressDialog.setTitle("Prescription");
-            // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.setIndeterminate(false);
-            // Show progressdialog
-            mProgressDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // Create the array
-            PrescriptionList = new ArrayList<prescription_support>();
-            try {
-                // Locate the class table named "Country" in Parse.com
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                        "Prescription");
-                // query.whereEqualTo("createdBy",  ParseUser.getCurrentUser());
-                query.whereEqualTo("Patient_ID", ParseUser.getCurrentUser().getObjectId());
-
-                ob = query.find();
-                for (ParseObject Prescription_Items : ob) {
-                    prescription_support map = new prescription_support();
-                    map.setPatient_Id((String) Prescription_Items.get("Patient_ID"));
-                    map.setPatient_Name((String) Prescription_Items.get("Patient_Name"));
-                    map.setDate_of_Birth((String) Prescription_Items.get("Patient_Date_of_Birth"));
-                    map.setAppointment_Date((String) Prescription_Items.get("AppointmentDate"));
-                    map.setDoctorname((String) Prescription_Items.get("Doctor_Name"));
-                    map.setDoctor_Id((String) Prescription_Items.get("Doctor_Id"));
-                    map.setMedication((String) Prescription_Items.get("Medication"));
-                    map.setMedicineamount((String) Prescription_Items.get("Medicine_Amount"));
-                    map.setMedicinedispense((String) Prescription_Items.get("Medicine_Dispense"));
-                    map.setMedicinerefill((String) Prescription_Items.get("Medicine_Refill"));
-                    PrescriptionList.add(map);
-                }
-            } catch (ParseException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(Void result) {
-            TextView noPre = (TextView)findViewById(R.id.noPrescription);
-            // Locate the listview in activity_booking_appointmenting_appointment.xml
-            listview = (ListView) findViewById(R.id.prescription_listview);
-            // Pass the results into Booking_ListViewAdapter.java
-            adapter = new Prescription_Booking_ListViewAdapter(PrescriptionActivity.this,
-                    PrescriptionList);
-            // Binds the Adapter to the ListView
-            if(adapter.getCount()!=0){
-                listview.setAdapter(adapter);
-                noPre.setVisibility(View.GONE);
-            }else{
-                Toast.makeText(PrescriptionActivity.this, "No Prescription To Order", Toast.LENGTH_SHORT).show();
-                noPre.setVisibility(View.VISIBLE);
-
-            }
-            // Close the progressdialog
-            mProgressDialog.dismiss();
-        }
-
-
-    }
-
     public void showAlertDialog(Context context, String title, String message, Boolean status) {
 
 
@@ -155,9 +81,10 @@ public class PrescriptionActivity extends Activity {
     @Override
     public void onStop() {
         super.onStop();
-       // this.finish();
+        // this.finish();
 
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -167,12 +94,85 @@ public class PrescriptionActivity extends Activity {
                     public void onClick(DialogInterface dialog, int id) {
 
 
-                   PrescriptionActivity.this.finish();
+                        PrescriptionActivity.this.finish();
 
                     }
                 })
                 .setNegativeButton("No", null)
                 .show();
+
+
+    }
+
+    // RemoteDataTask AsyncTask
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Create a progressdialog
+            mProgressDialog = new ProgressDialog(PrescriptionActivity.this);
+            // Set progressdialog title
+            mProgressDialog.setTitle("Prescription");
+            // Set progressdialog message
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setIndeterminate(false);
+            // Show progressdialog
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // Create the array
+            PrescriptionList = new ArrayList<prescription_support>();
+            try {
+                // Locate the class table named "Prescription" in Parse.com
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                        "Prescription");
+                query.whereEqualTo("Patient_ID", ParseUser.getCurrentUser().getObjectId());
+
+                ob = query.find();
+                for (ParseObject Prescription_Items : ob) {
+                    prescription_support map = new prescription_support();
+                    map.setPatient_Id((String) Prescription_Items.get("Patient_ID"));
+                    map.setPatient_Name((String) Prescription_Items.get("Patient_Name"));
+                    map.setDate_of_Birth((String) Prescription_Items.get("Patient_Date_of_Birth"));
+                    map.setAppointment_Date((String) Prescription_Items.get("AppointmentDate"));
+                    map.setDoctorname((String) Prescription_Items.get("Doctor_Name"));
+                    map.setDoctor_Id((String) Prescription_Items.get("Doctor_Id"));
+                    map.setMedication((String) Prescription_Items.get("Medication"));
+                    map.setMedicineamount((String) Prescription_Items.get("Medicine_Amount"));
+                    map.setMedicinedispense((String) Prescription_Items.get("Medicine_Dispense"));
+                    map.setMedicinerefill((String) Prescription_Items.get("Medicine_Refill"));
+                    PrescriptionList.add(map);
+                }
+            } catch (ParseException e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void result) {
+            TextView noPre = (TextView) findViewById(R.id.noPrescription);
+            // Locate the listview in activity_booking_appointmenting_appointment.xml
+            listview = (ListView) findViewById(R.id.prescription_listview);
+            // Pass the results into Booking_ListViewAdapter.java
+            adapter = new Prescription_Booking_ListViewAdapter(PrescriptionActivity.this,
+                    PrescriptionList);
+            // Binds the Adapter to the ListView
+            if (adapter.getCount() != 0) {
+                listview.setAdapter(adapter);
+                noPre.setVisibility(View.GONE);
+            } else {
+                Toast.makeText(PrescriptionActivity.this, "No Prescription To Order", Toast.LENGTH_SHORT).show();
+                noPre.setVisibility(View.VISIBLE);
+
+            }
+            // Close the progressdialog
+            mProgressDialog.dismiss();
+        }
 
 
     }

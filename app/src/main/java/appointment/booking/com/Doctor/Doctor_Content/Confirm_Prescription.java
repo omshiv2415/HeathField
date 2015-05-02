@@ -47,6 +47,49 @@ public class Confirm_Prescription extends Activity {
         empty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
     }
 
+    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+
+
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle(title);
+
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+
+        // Setting alert dialog icon
+        alertDialog.setIcon((status) ? R.drawable.success : R.drawable.error);
+
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Confirm_Prescription.this.finish();
+
+
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+
+
+    }
+
     // RemoteDataTask AsyncTask
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
         @Override
@@ -68,10 +111,9 @@ public class Confirm_Prescription extends Activity {
             // Create the array
             PrescriptionSupportList = new ArrayList<prescription_Confirmation_support>();
             try {
-                // Locate the class table named "Country" in Parse.com
+                // Locate the class table named "Ordered_Prescription" in Parse.com
                 ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                         "Ordered_Prescription");
-                // query.whereEqualTo("createdBy",  ParseUser.getCurrentUser());
 
                 query.whereEqualTo("Doctor_Name", ParseUser.getCurrentUser().get("Name"));
 
@@ -99,7 +141,7 @@ public class Confirm_Prescription extends Activity {
 
         @Override
         protected void onPostExecute(Void result) {
-            TextView noApp = (TextView)findViewById(R.id.noPrescription);
+            TextView noApp = (TextView) findViewById(R.id.noPrescription);
 
             // Locate the listview in activity_booking_appointmenting_appointment.xml
             listview = (ListView) findViewById(R.id.ConfirmPrescriptionListView);
@@ -107,10 +149,10 @@ public class Confirm_Prescription extends Activity {
             adapter = new Prescription_Confirmation_ListViewAdapter(Confirm_Prescription.this,
                     PrescriptionSupportList);
             // Binds the Adapter to the ListView
-            if(adapter.getCount()!=0){
+            if (adapter.getCount() != 0) {
                 listview.setAdapter(adapter);
                 noApp.setVisibility(View.GONE);
-            }else{
+            } else {
                 Toast.makeText(Confirm_Prescription.this, "No Appointments Booked", Toast.LENGTH_SHORT).show();
                 noApp.setVisibility(View.VISIBLE);
 
@@ -118,48 +160,6 @@ public class Confirm_Prescription extends Activity {
             // Close the progressdialog
             mProgressDialog.dismiss();
         }
-
-
-    }
-
-    public void showAlertDialog(Context context, String title, String message, Boolean status) {
-
-
-        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-
-        // Setting Dialog Title
-        alertDialog.setTitle(title);
-
-        // Setting Dialog Message
-        alertDialog.setMessage(message);
-
-        // Setting alert dialog icon
-        alertDialog.setIcon((status) ? R.drawable.success : R.drawable.error);
-
-        // Setting OK Button
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        // Showing Alert Message
-        alertDialog.show();
-
-    }
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        Confirm_Prescription.this.finish();
-
-
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
 
 
     }

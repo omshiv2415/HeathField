@@ -41,9 +41,9 @@ public class Booking_Appointments_View extends Activity {
     TextView DrName;
     TextView Appointment;
     TextView AppointmentNO;
-    String rank;
-    String country;
-    String population;
+    String DoctorId;
+    String DoctorName;
+    String Patient_Appointment;
     String cancel;
     String book;
     String Appointment_number;
@@ -56,12 +56,12 @@ public class Booking_Appointments_View extends Activity {
         setContentView(R.layout.singleitemview);
         // Retrieve data from booking appointment on item click event
         Intent i = getIntent();
-        // Get the results of rank
-        rank = i.getStringExtra("D_Id");
-        // Get the results of country
-        country = i.getStringExtra("D_Name");
-        // Get the results of population
-        population = i.getStringExtra("P_Appointment");
+        // Get the results of DoctorId
+        DoctorId = i.getStringExtra("D_Id");
+        // Get the results of DoctorName
+        DoctorName = i.getStringExtra("D_Name");
+        // Get the results of Patient_Appointmetn
+        Patient_Appointment = i.getStringExtra("P_Appointment");
         // Get the results of Cancel to Display cancel button
         cancel = i.getStringExtra("Cancel");
         // Get the results of Book to Display Booking button
@@ -73,30 +73,30 @@ public class Booking_Appointments_View extends Activity {
         DrID = (TextView) findViewById(R.id.Doctor_id);
         DrName = (TextView) findViewById(R.id.Doctor_name);
         Appointment = (TextView) findViewById(R.id.Appointment);
-        appButton = (Button)findViewById(R.id.appointment);
-        AppointmentNO= (TextView)findViewById(R.id.Appointment_no);
-        cancelAppointment =(Button)findViewById(R.id.appointment_Cancel);
+        appButton = (Button) findViewById(R.id.appointment);
+        AppointmentNO = (TextView) findViewById(R.id.Appointment_no);
+        cancelAppointment = (Button) findViewById(R.id.appointment_Cancel);
 
         // Load the results into the TextViews
-        DrID.setText(rank);
-        DrName.setText(country);
-        Appointment.setText(population);
+        DrID.setText(DoctorId);
+        DrName.setText(DoctorName);
+        Appointment.setText(Patient_Appointment);
         AppointmentNO.setText(Appointment_number);
 
-        if(book.equals("BookAppointment")) {
+
+        if (book.equals("BookAppointment")) {
+            // hiding appointment cancel button
             appButton.setVisibility(View.VISIBLE);
             cancelAppointment.setVisibility(View.GONE);
-        }else if(cancel.equals("CancelAppointment")){
+        } else if (cancel.equals("CancelAppointment")) {
+            // hiding appointment booking button
             appButton.setVisibility(View.GONE);
             cancelAppointment.setVisibility(View.VISIBLE);
-
         }
 
         appButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 ConnectionDetector cd;
                 // creating connection detector class instance
                 cd = new ConnectionDetector(getApplicationContext());
@@ -104,11 +104,11 @@ public class Booking_Appointments_View extends Activity {
                 isInternetPresent = cd.isConnectingToInternet();
                 // check for Internet status
                 if (isInternetPresent) if (ParseUser.getCurrentUser().get("Activity").equals(2)) {
-                    Toast toast = Toast.makeText(Booking_Appointments_View.this, " Sorry You can't book more than two appointments", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(Booking_Appointments_View.this, " Sorry You can't book more \n than two appointments", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 } else {
-
+                    // adding appointment to Patient Appointment for doctor and patient
                     ParseObject PatientAppointment = new ParseObject("PatientAppointment");
                     String drid = DrID.getText().toString().trim();
                     String drname = DrName.getText().toString().trim();
@@ -128,28 +128,27 @@ public class Booking_Appointments_View extends Activity {
                     Booking_History_Appointment.put("MyAppointment", appointment);
                     Booking_History_Appointment.put("Appointment_No", AppNo);
                     Booking_History_Appointment.saveEventually();
-
                     ParseUser user = ParseUser.getCurrentUser();
+                    // counting patient appointment to restrict patient
+                    // so patient can not book more than two appointment
                     user.increment("Activity");
                     user.saveEventually(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
-
                         }
                     });
-
-
                     PatientAppointment.saveEventually(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
 
                         }
                     });
+
+                    // string variable loading appointment date and time
                     String input = appointment;
                     Date date = null;
-
                     try {
-
+                        // converting to parse date format
                         date = new SimpleDateFormat("dd MMM yyyy EEE HH:mm", Locale.ENGLISH).parse(input);
                     } catch (java.text.ParseException e) {
                         e.printStackTrace();
@@ -159,25 +158,25 @@ public class Booking_Appointments_View extends Activity {
                     long oneDay = 86400000;
                     long milliseconds = date.getTime();
                     long millisecondsFromNow = milliseconds - (new Date()).getTime();
-                    long reminder = millisecondsFromNow -  oneDay;
-
+                    long reminder = millisecondsFromNow - oneDay;
 
                     Long time = new GregorianCalendar().getTimeInMillis() + reminder;
 
                     // create an Intent and set the class which will execute when Alarm triggers, here we have
                     // given AlarmReceiver in the Intent, the onRecieve() method of this class will execute when
-                    // alarm triggers and
-                    //we will write the code to send SMS inside onRecieve() method pf Alarmreciever class
+                    // alarm triggers and send notification
+
                     Intent intentAlarm = new Intent(Booking_Appointments_View.this, AlarmReceiver.class);
                     // create the object
                     AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                     //set the alarm for particular time
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, time, PendingIntent.getBroadcast(Booking_Appointments_View.this, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-                  //   Toast.makeText(Booking_Appointments_View.this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, time, PendingIntent.getBroadcast(Booking_Appointments_View.this, 1,
+                            intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 
-
+                    // Deleting Booked appointment from available appointment from Doctor
+                    // Class so appointment will not display to other patient.
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Doctor");
-                    query.whereEqualTo("Appointment_Number",AppNo);
+                    query.whereEqualTo("Appointment_Number", AppNo);
                     query.findInBackground(new FindCallback<ParseObject>() {
                         public void done(List<ParseObject> v, ParseException e) {
                             if (e == null) {
@@ -188,12 +187,15 @@ public class Booking_Appointments_View extends Activity {
                                     Toast toast = Toast.makeText(Booking_Appointments_View.this, " Appointment Booked Successfully ", Toast.LENGTH_LONG);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
+                                    // Taking patient to Patient Class where patient will see available appointment
                                     Intent takeUserHome = new Intent(Booking_Appointments_View.this, Patient.class);
                                     startActivity(takeUserHome);
-
                                 }
                             } else {
-
+                                // if appointment not booked Successfully
+                                Toast toast = Toast.makeText(Booking_Appointments_View.this, " Please Try Again ", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
                             }
                         }
                     });
@@ -204,14 +206,14 @@ public class Booking_Appointments_View extends Activity {
                     DoctorView.put("PatientID", patientid.toUpperCase());
                     DoctorView.put("DrID", drid);
                     DoctorView.put("DoctorName", drname);
-                    DoctorView.put("PatientName",ParseUser.getCurrentUser().get("Name"));
+                    DoctorView.put("PatientName", ParseUser.getCurrentUser().get("Name"));
                     DoctorView.put("MyAppointment", appointment);
                     DoctorView.put("Appointment_No", AppNo);
                     DoctorView.put("Patient_DOB", ParseUser.getCurrentUser().get("DateofBirth"));
                     DoctorView.put("Patient_Email", ParseUser.getCurrentUser().get("email"));
                     DoctorView.put("Patient_ContactNo", ParseUser.getCurrentUser().get("Contact_Number"));
 
-                   // DoctorView.saveInBackground();
+                    // saving data to parse
                     DoctorView.saveEventually();
                     // sending a notification to user once they booked the appointment
                     ParseQuery<ParseInstallation> pQuery = ParseInstallation.getQuery();
@@ -220,20 +222,22 @@ public class Booking_Appointments_View extends Activity {
                     push.setQuery(pQuery);
                     push.setMessage("Confirmation of Appointment on " + appointment);
                     push.sendInBackground();
-
                     Booking_Appointments_View.this.finish();
                 }
-                else{
+
+                else {
 
                     showAlertDialog(Booking_Appointments_View.this, "No Internet Connection",
                             "Please check your internet connection.", false);
 
                 }
-            }});
+            }
+        });
 
         cancelAppointment.setOnClickListener(new View.OnClickListener() {
 
             ParseObject PatientAppointment = new ParseObject("Doctor");
+
             @Override
             public void onClick(View view) {
 
@@ -245,35 +249,38 @@ public class Booking_Appointments_View extends Activity {
                 // check for Internet status
 
                 if (isInternetPresent) {
-                ParseQuery<ParseObject> Doctorquery = ParseQuery.getQuery("Doctor");
-                String drid = DrID.getText().toString().trim();
-                String drname = DrName.getText().toString().trim();
-                String appointment= Appointment.getText().toString().trim();
-                String AppNo = AppointmentNO.getText().toString();
+                    ParseQuery<ParseObject> Doctorquery = ParseQuery.getQuery("Doctor");
+                    String drid = DrID.getText().toString().trim();
+                    String drname = DrName.getText().toString().trim();
+                    String appointment = Appointment.getText().toString().trim();
+                    String AppNo = AppointmentNO.getText().toString();
 
-                Doctorquery.whereEqualTo("Appointment_Number", AppNo);
-                Doctorquery.findInBackground(new FindCallback<ParseObject>() {
-                    public void done(List<ParseObject> v, ParseException e) {
-                        if (e == null) {
-                            // ParseObject.deleteAllInBackground(v);
-                            for (final ParseObject invite : v) {
+                    Doctorquery.whereEqualTo("Appointment_Number", AppNo);
+                    Doctorquery.findInBackground(new FindCallback<ParseObject>() {
+                        public void done(List<ParseObject> v, ParseException e) {
+                            if (e == null) {
+                                // ParseObject.deleteAllInBackground(v);
+                                for (final ParseObject invite : v) {
+                                    // deleting appointment from Patient Appointment
+                                    invite.deleteInBackground();
+                                    Intent takeUserHome = new Intent(Booking_Appointments_View.this, Patient.class);
+                                    startActivity(takeUserHome);
 
-                                invite.deleteInBackground();
-                                Intent takeUserHome = new Intent(Booking_Appointments_View.this, Patient.class);
-                                startActivity(takeUserHome);
-
+                                }
+                            } else {
+                                // if appointment not cancel Successfully
+                                Toast toast = Toast.makeText(Booking_Appointments_View.this, " Please Try Again ", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
                             }
-                        } else {
-
                         }
-                    }
-                });
+                    });
 
-
-                PatientAppointment.put("Doctor_ID",drid);
-                PatientAppointment.put("Doctor_Name",drname);
-                PatientAppointment.put("Appointment_Slot",appointment);
-                PatientAppointment.put("Appointment_Number",AppNo);
+                    // adding appointment to Available appointment to other patient
+                    PatientAppointment.put("Doctor_ID", drid);
+                    PatientAppointment.put("Doctor_Name", drname);
+                    PatientAppointment.put("Appointment_Slot", appointment);
+                    PatientAppointment.put("Appointment_Number", AppNo);
 
                     // creating history of cancel appointments
                     ParseObject PatientCancelHistory = new ParseObject("PatientAppointmentHistory");
@@ -287,68 +294,71 @@ public class Booking_Appointments_View extends Activity {
                     ParseUser user = ParseUser.getCurrentUser();
                     Number decrement = (Number) user.get("Activity");
 
-                    if (decrement.equals(2)){
-                    user.put("Activity",1);
-                    user.saveInBackground();
-                    user.saveEventually();
+                    if (decrement.equals(2)) {
+                        user.put("Activity", 1);
+                        user.saveInBackground();
+                        user.saveEventually();
 
+                        // decrementing patient appointment count so patient can book
+                        // another appointment
+                    } else if (decrement.equals(1)) {
 
-
-                }else if(decrement.equals(1)){
-
-                    user.put("Activity",0);
-                    user.saveInBackground();
-                    user.saveEventually();
-                }
-
-                PatientAppointment.saveEventually();
-                ParseQuery<ParseInstallation> pQuery = ParseInstallation.getQuery();
-                pQuery.whereEqualTo("username", ParseUser.getCurrentUser());
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientAppointment");
-                query.whereEqualTo("Appointment_No",AppNo);
-                query.findInBackground(new FindCallback<ParseObject>() {
-                    public void done(List<ParseObject> v, ParseException e) {
-                        if (e == null) {
-                            // ParseObject.deleteAllInBackground(v);
-                            for (ParseObject invite : v) {
-                                invite.deleteInBackground();
-                                 Toast toast = Toast.makeText(Booking_Appointments_View.this, " Appointment Cancel Successfully ", Toast.LENGTH_LONG);
-                                  toast.setGravity(Gravity.CENTER, 0, 0);
-                                  toast.show();
-                                Intent takeUserHome = new Intent(Booking_Appointments_View.this, Patient.class);
-                                startActivity(takeUserHome);
-
-                            }
-                        } else {
-                            //Handle condition here
-                        }
+                        user.put("Activity", 0);
+                        user.saveInBackground();
+                        user.saveEventually();
                     }
-                });
-                ParseQuery<ParseObject> DocQuery = ParseQuery.getQuery("DoctorView");
-                DocQuery.whereEqualTo("Appointment_No", AppNo);
-                DocQuery.findInBackground(new FindCallback<ParseObject>() {
-                    public void done(List<ParseObject> v, ParseException e) {
-                        if (e == null) {
-                            // ParseObject.deleteAllInBackground(v);
-                            for (ParseObject invite : v) {
-                                invite.deleteInBackground();
+                    // saving all the data to parse
+                    PatientAppointment.saveEventually();
 
+                    ParseQuery<ParseInstallation> pQuery = ParseInstallation.getQuery();
+                    pQuery.whereEqualTo("username", ParseUser.getCurrentUser());
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientAppointment");
+                    query.whereEqualTo("Appointment_No", AppNo);
+                    query.findInBackground(new FindCallback<ParseObject>() {
+                        public void done(List<ParseObject> v, ParseException e) {
+                            if (e == null) {
+                                // ParseObject.deleteAllInBackground(v);
+                                for (ParseObject invite : v) {
+                                    invite.deleteInBackground();
+                                    Toast toast = Toast.makeText(Booking_Appointments_View.this, " Appointment Cancel Successfully ", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                    Intent takeUserHome = new Intent(Booking_Appointments_View.this, Patient.class);
+                                    startActivity(takeUserHome);
+
+                                }
+                            } else {
+                                //Handle condition here
                             }
-                        } else {
-                            //Handle condition here
                         }
-                    }
-                });
+                    });
+                    ParseQuery<ParseObject> DocQuery = ParseQuery.getQuery("DoctorView");
+                    DocQuery.whereEqualTo("Appointment_No", AppNo);
+                    DocQuery.findInBackground(new FindCallback<ParseObject>() {
+                        public void done(List<ParseObject> v, ParseException e) {
+                            if (e == null) {
+                                // ParseObject.deleteAllInBackground(v);
+                                for (ParseObject invite : v) {
+                                    invite.deleteInBackground();
 
-                ParsePush push = new ParsePush();
-                push.setQuery(pQuery);
-                push.setMessage("You have Successfully cancel your appointment on "+ appointment);
-                push.sendInBackground();
-                Booking_Appointments_View.this.finish();
-            }else{
+                                }
+                            } else {
+                                //Handle condition here
+                            }
+                        }
+                    });
+
+                    ParsePush push = new ParsePush();
+                    push.setQuery(pQuery);
+                    push.setMessage("You have Successfully cancel your appointment on " + appointment);
+                    push.sendInBackground();
+                    Booking_Appointments_View.this.finish();
+                } else {
                     showAlertDialog(Booking_Appointments_View.this, "No Internet Connection",
                             "Please check your internet connection.", false);
-                }}});
+                }
+            }
+        });
 
     }
 
@@ -375,6 +385,7 @@ public class Booking_Appointments_View extends Activity {
         alertDialog.show();
 
     }
+
     @Override
     public void onStop() {
         super.onStop();

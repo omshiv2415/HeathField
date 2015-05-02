@@ -6,8 +6,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,6 +30,7 @@ import appointment.booking.com.heathfield.R;
 
 public class PatientRegister extends Activity implements AdapterView.OnItemSelectedListener {
 
+    static final int DATE_DIALOG_ID = 1;
     protected EditText Name;
     protected EditText DateOfBirth;
     protected EditText Enail;
@@ -42,14 +41,25 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
     protected EditText p_Phone;
     protected Button RegisterButton;
     protected TextView AllreadyHaveanAccount;
+    String Gender;
+    Spinner spinnerGender;
     private TextToSpeech speech;
     private int mYear;
     private int mMonth;
     private int mDay;
-    static final int DATE_DIALOG_ID = 1;
-    String Gender;
-    Spinner spinnerGender;
+    private DatePickerDialog.OnDateSetListener mDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+                    mYear = year;
+                    mMonth = monthOfYear;
+                    mDay = dayOfMonth;
+                    updateDisplay();
+                }
+            };
     private String[] state = {"Male", "Female"};
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,140 +118,114 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
                 String PCid = CreateId.getText().toString().trim();
                 String pPassword = Password.getText().toString().trim();
                 String plastName = lastname.getText().toString().trim();
-
-
                 ParseUser user = new ParseUser();
-
-                if (pName.equals("")){
-
-
-                    speech=new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
+                //1. Validation For Name
+                if (pName.equals("")) {
+                    speech = new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
                         @Override
                         public void onInit(int status) {
-                            if(status != TextToSpeech.ERROR){
+                            if (status != TextToSpeech.ERROR) {
                                 speech.setLanguage(Locale.UK);
-                                String toSpeak =("Sorry Please provide Name");
+                                String toSpeak = ("Sorry Please provide Name");
                                 speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                                 Toast.makeText(PatientRegister.this, toSpeak,
                                         Toast.LENGTH_SHORT).show();
-
-
                             }
                         }
                     });
+                    //2. Validation For Last Name
+                } else if (plastName.equals("")) {
 
-                } else if(plastName.equals("")){
 
-
-                    speech=new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
+                    speech = new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
                         @Override
                         public void onInit(int status) {
-                            if(status != TextToSpeech.ERROR){
+                            if (status != TextToSpeech.ERROR) {
                                 speech.setLanguage(Locale.UK);
-                                String toSpeak =("Sorry Please provide Last Name");
+                                String toSpeak = ("Sorry Please provide Last Name");
                                 speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                                 Toast.makeText(PatientRegister.this, toSpeak,
                                         Toast.LENGTH_SHORT).show();
-
-
                             }
                         }
                     });
+                    //3. Validation For Date of Birth
+                } else if (pDateOfBirth.equals("")) {
 
 
-                }else if(pDateOfBirth.equals("")){
-
-
-                    speech=new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
+                    speech = new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
                         @Override
                         public void onInit(int status) {
-                            if(status != TextToSpeech.ERROR){
+                            if (status != TextToSpeech.ERROR) {
                                 speech.setLanguage(Locale.UK);
-                                String toSpeak =("Sorry Please provide Date of Birth");
+                                String toSpeak = ("Sorry Please provide Date of Birth");
                                 speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                                 Toast.makeText(PatientRegister.this, toSpeak,
                                         Toast.LENGTH_SHORT).show();
-
-
                             }
                         }
                     });
-
-
                 }
-
-
-                else if(!isValidEmail(pEmail)){
-                    speech=new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
+                //4. Validation For Email Address
+                else if (!isValidEmail(pEmail)) {
+                    speech = new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
                         @Override
                         public void onInit(int status) {
-                            if(status != TextToSpeech.ERROR){
+                            if (status != TextToSpeech.ERROR) {
                                 speech.setLanguage(Locale.UK);
-                                String toSpeak =("Please provide correct Email");
+                                String toSpeak = ("Please provide correct Email");
                                 speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                                 Toast.makeText(PatientRegister.this, toSpeak,
                                         Toast.LENGTH_SHORT).show();
-
-
                             }
                         }
                     });
-
-                }  else if (!isValidPhone(pPhone)){
-                    speech=new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
-                        @Override
-                        public void onInit(int status) {
-                            if(status != TextToSpeech.ERROR){
-                                speech.setLanguage(Locale.UK);
-                                String toSpeak =("Sorry Phone Number must be 11 Digit");
-                                speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-                                Toast.makeText(PatientRegister.this, toSpeak,
-                                        Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        }
-                    });
-
-                } else if(!isValidPatientID(PCid)){
-
-
-                    speech=new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
-                        @Override
-                        public void onInit(int status) {
-                            if(status != TextToSpeech.ERROR){
-                                speech.setLanguage(Locale.UK);
-                                String toSpeak =("Sorry Patient Login ID must be between 6 and 12");
-                                speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-                                Toast.makeText(PatientRegister.this, toSpeak,
-                                        Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        }
-                    });
-
-
-                }else if (!isValidPassword(pPassword)){
-
-                    speech=new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
-                        @Override
-                        public void onInit(int status) {
-                            if(status != TextToSpeech.ERROR){
-                                speech.setLanguage(Locale.UK);
-                                String toSpeak =("Sorry Password must be between 7 and 21");
-                                speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-                                Toast.makeText(PatientRegister.this, toSpeak,
-                                        Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        }
-                    });
-
                 }
-
-                else{
+                //5. Validation For Phone No
+                else if (!isValidPhone(pPhone)) {
+                    speech = new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
+                        @Override
+                        public void onInit(int status) {
+                            if (status != TextToSpeech.ERROR) {
+                                speech.setLanguage(Locale.UK);
+                                String toSpeak = ("Sorry Phone Number must be 11 Digit");
+                                speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                                Toast.makeText(PatientRegister.this, toSpeak,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                //5. Validation For ID It checks Id must be between 6 and 12
+                else if (!isValidPatientID(PCid)) {
+                    speech = new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
+                        @Override
+                        public void onInit(int status) {
+                            if (status != TextToSpeech.ERROR) {
+                                speech.setLanguage(Locale.UK);
+                                String toSpeak = ("Sorry Patient Login ID must be between 6 and 12");
+                                speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                                Toast.makeText(PatientRegister.this, toSpeak,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                //6. Validation For Password It checks Password must be between 7 and 21
+                else if (!isValidPassword(pPassword)) {
+                    speech = new TextToSpeech(PatientRegister.this, new TextToSpeech.OnInitListener() {
+                        @Override
+                        public void onInit(int status) {
+                            if (status != TextToSpeech.ERROR) {
+                                speech.setLanguage(Locale.UK);
+                                String toSpeak = ("Sorry Password must be between 7 and 21");
+                                speech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                                Toast.makeText(PatientRegister.this, toSpeak,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
 
                     user.setPassword(pPassword);
                     user.setUsername(PCid);
@@ -250,41 +234,37 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
                     user.put("Name", pName);
                     user.put("DateofBirth", pDateOfBirth);
                     user.put("Gender", Gender);
-                    user.put("Contact_Number",pPhone);
+                    user.put("Contact_Number", pPhone);
+                    // setting activity as 0 to restrict the patient to book more than two appointment
                     user.put("Activity", 0);
-                    user.put("Verify","Patient");
-                    user.put("Order_Prescription",0);
-
-
+                    // verifying user is patient or doctor
+                    user.put("Verify", "Patient");
+                    // setting activity as 0 to restrict the patient to book more than five prescription
+                    user.put("Order_Prescription", 0);
 
                     user.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
                             if (e == null) {
-
                                 // user signed up successfully
-
                                 Toast.makeText(PatientRegister.this, "Registered Successfully", Toast.LENGTH_LONG).show();
                                 // take user login page
                                 Intent takeUserHome = new Intent(PatientRegister.this, PatientLogin.class);
                                 startActivity(takeUserHome);
-
-
                             } else {
                                 //there was an error signing up user.
                                 Toast.makeText(PatientRegister.this, "Please Select different User Name or Email Address",
-                                Toast.LENGTH_LONG).show();
-
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
                     });
 
-
                 }
 
-
             }
-        });};
+        });
+    }
+
     // validating email id
     private boolean isValidEmail(String email) {
         String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -295,29 +275,31 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
         return matcher.matches();
     }
 
-    private boolean isValidName(String name ){
-        if (name != null && name.length() >= 0 && name.length() <= 32 ){
+    private boolean isValidName(String name) {
+        if (name != null && name.length() >= 0 && name.length() <= 32) {
             return true;
         }
         return false;
     }
 
-    private boolean isValidDateofBirth(String dob ){
-        if (dob != null && dob.length() >= 0 && dob.length() <= 8 ){
+    private boolean isValidDateofBirth(String dob) {
+        if (dob != null && dob.length() >= 0 && dob.length() <= 8) {
             return true;
         }
         return false;
 
     }
-    private boolean isValidPatientID(String pid ){
-        if (pid != null && pid.length() >= 6 && pid.length() <= 12 ){
+
+    private boolean isValidPatientID(String pid) {
+        if (pid != null && pid.length() >= 6 && pid.length() <= 12) {
             return true;
         }
         return false;
 
     }
-    private boolean isValidLastName(String Lastname ){
-        if (Lastname != null && Lastname.length() >= 0 && Lastname.length() <= 32 ){
+
+    private boolean isValidLastName(String Lastname) {
+        if (Lastname != null && Lastname.length() >= 0 && Lastname.length() <= 32) {
             return true;
         }
         return false;
@@ -326,13 +308,14 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
 
     // validating password with retype password
     private boolean isValidPassword(String pass) {
-        if (pass != null && pass.length() >= 7 && pass.length() <= 21 ){
+        if (pass != null && pass.length() >= 7 && pass.length() <= 21) {
             return true;
         }
         return false;
     }
+
     private boolean isValidPhone(String pass) {
-        if (pass != null && pass.length() >= 11 && pass.length() <= 11 ){
+        if (pass != null && pass.length() >= 11 && pass.length() <= 11) {
             return true;
         }
         return false;
@@ -368,40 +351,6 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
                         .append(mYear).append(" "));
     }
 
-    private DatePickerDialog.OnDateSetListener mDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
-
-                public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                      int dayOfMonth) {
-                    mYear = year;
-                    mMonth = monthOfYear;
-                    mDay = dayOfMonth;
-                    updateDisplay();
-                }
-            };
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.patient_register, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         spinnerGender.setSelection(position);
@@ -412,7 +361,6 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
 
 
     }

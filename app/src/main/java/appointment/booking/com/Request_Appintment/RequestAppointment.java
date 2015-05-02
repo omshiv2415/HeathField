@@ -43,15 +43,13 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
     protected EditText RAppointmentDatePatient;
     protected EditText RAppointmentTimePatient;
     protected EditText RpatientPhone;
+    protected Button RAppointmentRequestbtn;
     Spinner spinnerDoctor;
     ProgressDialog mProgressDialog;
-    protected Button RAppointmentRequestbtn;
+    String Doctor;
     private int mYear;
     private int mMonth;
     private int mDay;
-
-    String Doctor;
-
     private String[] state = {"Dr Hameed", "Dr B R Patel", "Dr Jamal"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +95,7 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
         TextView head4 = (TextView)findViewById(R.id.textView6);
         TextView head5 = (TextView)findViewById(R.id.textView9);
 
+        //Setting up Fonts for each field
         Typeface Heading = Typeface.createFromAsset(getAssets(), "fonts/Sansation_Regular.ttf");
         head.setTypeface(Heading);
         head.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
@@ -193,9 +192,6 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
                 }
                 String v = (format2.format(date) +" "+ appointmentTime);
 
-
-
-
                 if (Doctor.equals("Dr B R Patel")){
                     PatientAppointment.put("DoctorID", DoctorBRPatelId);
                     PatientAppointment.put("createdBy", ParseUser.getCurrentUser());
@@ -232,12 +228,13 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
                     PatientAppointment.put("PatientPhone", patientPhone);
                     PatientAppointment.put("RequestedEmail", Patientemail);
                     PatientAppointment.put("RequestedId", Patientid);
-                    PatientAppointment.put("PatientDob",PatientDob);
+                    PatientAppointment.put("PatientDob", PatientDob);
                     PatientAppointment.saveEventually();
+
                 }
 
-                Toast toast = Toast.makeText(RequestAppointment.this, " Appointment Requested Successfully ", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
+                Toast toast = Toast.makeText(RequestAppointment.this, "Appointment Requested \n          Successfully", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 Intent takeUserHome = new Intent(RequestAppointment.this, Patient.class);
                 startActivity(takeUserHome);
@@ -245,7 +242,7 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
                 pQuery.whereEqualTo("username", ParseUser.getCurrentUser());
                 ParsePush push = new ParsePush();
                 push.setQuery(pQuery);
-                push.setMessage("Appointment Requested Successfully we will be back withing 48 hours to you");
+                push.setMessage("Appointment Requested Successfully \n We will be back withing 48 hours to you");
                 push.sendInBackground();
                 RequestAppointment.this.finish();
             }

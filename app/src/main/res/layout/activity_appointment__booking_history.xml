@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
     tools:context="appointment.booking.com.booking.History.Appointment_Booking_History">
 
     <ListView
@@ -11,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="55dp"
         android:background="@android:color/holo_blue_light"
         android:divider="@android:color/transparent"
         android:dividerHeight="@dimen/divider"
@@ -25,19 +26,42 @@
         android:visibility="visible" />
 
     <TextView
+        android:id="@+id/empty_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No  Appointment  Booking History"
-        android:id="@+id/empty_history"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold|italic"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/heath"
+        android:layout_centerVertical="true"
         android:background="@android:drawable/alert_dark_frame"
-        android:textAlignment="center"
         android:gravity="center"
+        android:text="No  Appointment  Booking History"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="@dimen/heath"
+        android:textStyle="bold|italic"
         android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Appointment Booking History"
+        android:textColor="@android:color/background_light"
+        android:textSize="@dimen/abc_action_bar_subtitle_text_size"
+        android:textStyle="bold|italic" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/background_dark"
+        android:orientation="horizontal" />
 
 
 </RelativeLayout>

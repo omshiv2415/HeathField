@@ -39,7 +39,8 @@ public class PasswordReset extends Activity {
                             // An email was successfully sent with reset instructions.
                             Intent takeUserRegister = new Intent(PasswordReset.this, Login.class);
                             startActivity(takeUserRegister);
-                            Toast.makeText(PasswordReset.this, "The email has been sent successfully with reset instruction", Toast.LENGTH_LONG).show();
+                            Toast.makeText(PasswordReset.this, "       The email has been sent    \n" +
+                                    " successfully with reset instruction", Toast.LENGTH_LONG).show();
                             PasswordReset.this.finish();
                         } else {
                             // Something went wrong. Look at the ParseException to see what's up.
@@ -52,3 +53,5 @@ public class PasswordReset extends Activity {
 
     }
 }
+
+

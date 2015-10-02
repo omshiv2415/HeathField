@@ -11,14 +11,14 @@ public final class R {
     public static final class attr {
     }
     public static final class dimen {
-        public static final int Padleft=0x7f040000;
-        public static final int abc_action_bar_subtitle_text_size=0x7f040001;
-        public static final int abc_action_bar_title_text_size=0x7f040002;
-        public static final int activity_horizontal_margin=0x7f040003;
-        public static final int activity_vertical_margin=0x7f040004;
-        public static final int button=0x7f040005;
-        public static final int divider=0x7f040006;
-        public static final int heath=0x7f040007;
+        public static final int Padleft=0x7f050003;
+        public static final int abc_action_bar_subtitle_text_size=0x7f050000;
+        public static final int abc_action_bar_title_text_size=0x7f050001;
+        public static final int activity_horizontal_margin=0x7f050002;
+        public static final int activity_vertical_margin=0x7f050004;
+        public static final int button=0x7f050005;
+        public static final int divider=0x7f050006;
+        public static final int heath=0x7f050007;
     }
     public static final class drawable {
         public static final int app=0x7f020000;
@@ -234,10 +234,10 @@ public final class R {
         public static final int webView=0x7f09005f;
     }
     public static final class integer {
-        public static final int create_account_pane_column_count=0x7f050000;
-        public static final int password=0x7f050001;
-        public static final int restrictuser=0x7f050002;
-        public static final int username=0x7f050003;
+        public static final int create_account_pane_column_count=0x7f060000;
+        public static final int password=0x7f060001;
+        public static final int restrictuser=0x7f060002;
+        public static final int username=0x7f060003;
     }
     public static final class layout {
         public static final int activity_appointment__booking_history=0x7f030000;
@@ -295,41 +295,41 @@ public final class R {
         public static final int request_appointment=0x7f080011;
     }
     public static final class string {
-        public static final int PID_=0x7f060000;
-        public static final int action_settings=0x7f060001;
-        public static final int app_name=0x7f060002;
-        public static final int countrylabel=0x7f060003;
-        public static final int hello_world=0x7f060004;
-        public static final int namelabel=0x7f060005;
-        public static final int object=0x7f060006;
-        public static final int populationlabel=0x7f060007;
-        public static final int ranklabel=0x7f060008;
-        public static final int reminder=0x7f060009;
-        public static final int sign_up_error_title=0x7f06000a;
-        public static final int some_hint=0x7f06000b;
-        public static final int title_activity_appointment=0x7f06000c;
-        public static final int title_activity_appointment__booking_=0x7f06000d;
-        public static final int title_activity_appointment__cancel__history=0x7f06000e;
-        public static final int title_activity_cancel_appointment=0x7f06000f;
-        public static final int title_activity_confirm__appointment=0x7f060010;
-        public static final int title_activity_confirm__prescription=0x7f060011;
-        public static final int title_activity_doctor__main=0x7f060012;
-        public static final int title_activity_doctor_home=0x7f060013;
-        public static final int title_activity_doctor_login=0x7f060014;
-        public static final int title_activity_main=0x7f060015;
-        public static final int title_activity_my=0x7f060016;
-        public static final int title_activity_notification_patient=0x7f060017;
-        public static final int title_activity_patient_home=0x7f060018;
-        public static final int title_activity_patient_login=0x7f060019;
-        public static final int title_activity_patient_register=0x7f06001a;
-        public static final int title_activity_patint_main=0x7f06001b;
-        public static final int title_activity_prescription=0x7f06001c;
-        public static final int title_activity_request_appointment=0x7f06001d;
-        public static final int welcome=0x7f06001e;
+        public static final int PID=0x7f070000;
+        public static final int action_settings=0x7f070001;
+        public static final int app_name=0x7f070002;
+        public static final int countrylabel=0x7f070003;
+        public static final int hello_world=0x7f070004;
+        public static final int namelabel=0x7f070005;
+        public static final int object=0x7f070006;
+        public static final int populationlabel=0x7f070007;
+        public static final int ranklabel=0x7f070008;
+        public static final int reminder=0x7f070009;
+        public static final int sign_up_error_title=0x7f07000a;
+        public static final int some_hint=0x7f07000b;
+        public static final int title_activity_appointment=0x7f07000c;
+        public static final int title_activity_appointment__booking_=0x7f07000d;
+        public static final int title_activity_appointment__cancel__history=0x7f07000e;
+        public static final int title_activity_cancel_appointment=0x7f07000f;
+        public static final int title_activity_confirm__appointment=0x7f070010;
+        public static final int title_activity_confirm__prescription=0x7f070011;
+        public static final int title_activity_doctor__main=0x7f070012;
+        public static final int title_activity_doctor_home=0x7f070013;
+        public static final int title_activity_doctor_login=0x7f070014;
+        public static final int title_activity_main=0x7f070015;
+        public static final int title_activity_my=0x7f070016;
+        public static final int title_activity_notification_patient=0x7f070017;
+        public static final int title_activity_patient_home=0x7f070018;
+        public static final int title_activity_patient_login=0x7f070019;
+        public static final int title_activity_patient_register=0x7f07001a;
+        public static final int title_activity_patint_main=0x7f07001b;
+        public static final int title_activity_prescription=0x7f07001c;
+        public static final int title_activity_request_appointment=0x7f07001d;
+        public static final int welcome=0x7f07001e;
     }
     public static final class style {
         /**  Customize your theme here. 
          */
-        public static final int AppTheme=0x7f070000;
+        public static final int AppTheme=0x7f040000;
     }
 }

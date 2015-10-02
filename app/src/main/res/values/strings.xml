@@ -24,7 +24,7 @@
     <string name="countrylabel">   "Doctor Name       : "</string>
     <string name="populationlabel">"Appointment        : "</string>
     <string name="object">         "Appointment No  : "</string>
-    <string name="PID:">Patient ID     :</string>
+    <string name="PID">Patient ID     :</string>
     <string name="some_hint">     Type here to filter…</string>
     <string name="title_activity_request_appointment">RequestAppointment</string>
     <string name="title_activity_confirm__prescription">Confirm_Prescription</string>

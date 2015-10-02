@@ -1,65 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pre-dex-items>
+<items version="2" >
 
     <item
-        dex="C:\BSC COMPUTING SYSTEMS\HeathField\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.4-javadoc-4c7347a02d44fce98574b2c9ebecf08f6135870a.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\HeathField\app\libs\Parse-1.8.1\bolts-android-1.1.4-javadoc.jar"
+        jar="/Users/admin/HeathField/app/libs/Parse-1.8.1/bolts-android-1.1.4.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="f5dd6492c539679411fa30818320b737c410158f"/>
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="/Users/admin/HeathField/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-33fa1abb2da8703bd120c54005b294f04edcb658.jar" />
+    </item>
     <item
-        dex="C:\BSC COMPUTING SYSTEMS\HeathField\app\build\intermediates\pre-dexed\debug\Parse-1.8.1-bf238666f47fbaaa7804fa4b92543b3690ec069f.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\HeathField\app\libs\Parse-1.8.1\Parse-1.8.1.jar"
+        jar="/Users/admin/HeathField/app/libs/Parse-1.8.1/ParseCrashReporting-1.8.1.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="dd491448169a0c142a786164b249139d2407a6f9"/>
+        sha1="01cd6a9702d4fdba38c93426da8f2fffc738e107">
+        <dex dex="/Users/admin/HeathField/app/build/intermediates/pre-dexed/debug/ParseCrashReporting-1.8.1-ce39d98d3615dbe693524587605e737f8e7034f2.jar" />
+    </item>
     <item
-        dex="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.4-javadoc-7f45b799079c213941df09b8ed921db74625f335.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\libs\Parse-1.8.1\bolts-android-1.1.4-javadoc.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="f5dd6492c539679411fa30818320b737c410158f"/>
-    <item
-        dex="C:\BSC COMPUTING SYSTEMS\HeathField\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.4-d39e6af734f410f8f0a872408aaddddf1d67c10a.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\HeathField\app\libs\Parse-1.8.1\bolts-android-1.1.4.jar"
+        jar="/Users/admin/HeathField/app/libs/Parse-1.8.1/Parse-1.8.1.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="129874135e6081269ace2312092031558865de12"/>
-    <item
-        dex="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.4-4e636278367f51ff7586f3237a0bd24245b7f44b.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\libs\Parse-1.8.1\bolts-android-1.1.4.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="129874135e6081269ace2312092031558865de12"/>
-    <item
-        dex="C:\BSC COMPUTING SYSTEMS\HeathField\app\build\intermediates\pre-dexed\debug\ParseCrashReporting-1.8.1-f36af13bf9327c0001297cc597dc65b840f1723a.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\HeathField\app\libs\Parse-1.8.1\ParseCrashReporting-1.8.1.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="01cd6a9702d4fdba38c93426da8f2fffc738e107"/>
-    <item
-        dex="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\build\intermediates\pre-dexed\debug\Parse-1.8.1-0b2fa24973c33ae88407ef5db6b00ac9272e81e3.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\libs\Parse-1.8.1\Parse-1.8.1.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="dd491448169a0c142a786164b249139d2407a6f9"/>
-    <item
-        dex="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.4-4e636278367f51ff7586f3237a0bd24245b7f44b.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\libs\Parse-1.8.1\bolts-android-1.1.4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="129874135e6081269ace2312092031558865de12"/>
-    <item
-        dex="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.4-javadoc-7f45b799079c213941df09b8ed921db74625f335.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\libs\Parse-1.8.1\bolts-android-1.1.4-javadoc.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="f5dd6492c539679411fa30818320b737c410158f"/>
-    <item
-        dex="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\build\intermediates\pre-dexed\debug\Parse-1.8.1-0b2fa24973c33ae88407ef5db6b00ac9272e81e3.jar"
-        jar="C:\BSC COMPUTING SYSTEMS\PROJECT (GP SURGERY ANDROID APP)\quickblox-android-sdk-master\HeathField\app\libs\Parse-1.8.1\Parse-1.8.1.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="dd491448169a0c142a786164b249139d2407a6f9"/>
+        sha1="dd491448169a0c142a786164b249139d2407a6f9">
+        <dex dex="/Users/admin/HeathField/app/build/intermediates/pre-dexed/debug/Parse-1.8.1-a9517fefba8a161f4ee528f7099565b60e6bf3e5.jar" />
+    </item>
 
-</pre-dex-items>
+</items>

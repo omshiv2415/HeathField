@@ -18,7 +18,7 @@ public class AppParse extends Application{
         Parse.initialize(this, "rpcplJPWVKUYBUl0r7DOd5lG2eSpKwvxHYb3M9Vm", "vt3kreg6ApoD3LvBFelpU6VEGROj5IRpOOe4Q3Cr");
         PushService.setDefaultPushCallback(this,Login.class);
         // Enable Crash Reporting
-        ParseCrashReporting.enable(this);
+       // ParseCrashReporting.enable(this);
        // ParseUser.enableAutomaticUser();
        // ParseACL defaultACL = new ParseACL();
         // If you would like all objects to be private by default, remove this line.

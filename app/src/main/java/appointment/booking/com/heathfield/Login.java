@@ -13,7 +13,7 @@ import com.parse.ParseAnalytics;
 import appointment.booking.com.Doctor.Doctor_Content.DoctorLogin;
 import appointment.booking.com.patient.PatientLogin;
 
-
+//login Activity
 public class Login extends Activity {
 
     protected ImageButton Doctors;

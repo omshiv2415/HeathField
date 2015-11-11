@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/Users/admin/HeathField/app/libs/Parse-1.8.1/bolts-android-1.1.4.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="129874135e6081269ace2312092031558865de12">
-        <dex dex="/Users/admin/HeathField/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-33fa1abb2da8703bd120c54005b294f04edcb658.jar" />
-    </item>
-    <item
-        jar="/Users/admin/HeathField/app/libs/Parse-1.8.1/ParseCrashReporting-1.8.1.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="01cd6a9702d4fdba38c93426da8f2fffc738e107">
-        <dex dex="/Users/admin/HeathField/app/build/intermediates/pre-dexed/debug/ParseCrashReporting-1.8.1-ce39d98d3615dbe693524587605e737f8e7034f2.jar" />
-    </item>
-    <item
-        jar="/Users/admin/HeathField/app/libs/Parse-1.8.1/Parse-1.8.1.jar"
+        jar="C:\BSC\HeathField\app\libs\Parse-1.8.1\Parse-1.8.1.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="dd491448169a0c142a786164b249139d2407a6f9">
-        <dex dex="/Users/admin/HeathField/app/build/intermediates/pre-dexed/debug/Parse-1.8.1-a9517fefba8a161f4ee528f7099565b60e6bf3e5.jar" />
+        <dex dex="C:\BSC\HeathField\app\build\intermediates\pre-dexed\debug\Parse-1.8.1-b54e6f7e92ef6745eb12aa4454d93f0eefaa82ec.jar" />
+    </item>
+    <item
+        jar="C:\BSC\HeathField\app\libs\Parse-1.8.1\bolts-android-1.1.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="C:\BSC\HeathField\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.4-1883ae950e1d5342e5954fecece7c55fd40352f1.jar" />
+    </item>
+    <item
+        jar="C:\BSC\HeathField\app\libs\Parse-1.8.1\ParseCrashReporting-1.8.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="01cd6a9702d4fdba38c93426da8f2fffc738e107">
+        <dex dex="C:\BSC\HeathField\app\build\intermediates\pre-dexed\debug\ParseCrashReporting-1.8.1-c23b972aa394ded7ad9201b2fb6b68bf2d004ff8.jar" />
     </item>
 
 </items>

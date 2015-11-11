@@ -1,9 +1,7 @@
 package appointment.booking.com.Doctor.Doctor_Support;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,15 +21,10 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.RefreshCallback;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
 import appointment.booking.com.heathfield.R;
 import appointment.booking.com.patient.Patient;
-import appointment.booking.com.support.AlarmReceiver;
 import appointment.booking.com.support.ConnectionDetector;
 
 public class Confirm_Appointments_View extends Activity {
@@ -95,20 +88,14 @@ public class Confirm_Appointments_View extends Activity {
         appButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 ConnectionDetector cd;
                 // creating connection detector class instance
                 cd = new ConnectionDetector(getApplicationContext());
                 // get Internet status
                 isInternetPresent = cd.isConnectingToInternet();
                 // check for Internet status
-                if (isInternetPresent) if (ParseUser.getCurrentUser().get("Activity").equals(2)) {
-                    Toast toast = Toast.makeText(Confirm_Appointments_View.this, " Sorry You can't book more than two appointments", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                } else {
 
+                if (isInternetPresent) {
                     ParseObject PatientAppointment = new ParseObject("PatientAppointment");
                     String drid = DrID.getText().toString().trim();
                     String drname = DrName.getText().toString().trim();
@@ -123,37 +110,6 @@ public class Confirm_Appointments_View extends Activity {
                     user.increment("Activity");
                     //PatientAppointment.saveInBackground();
                     PatientAppointment.saveEventually();
-                    String input = appointment;
-                    Date date = null;
-
-                    try {
-
-                        date = new SimpleDateFormat("dd MMM yyyy EEE HH:mm", Locale.ENGLISH).parse(input);
-                    } catch (java.text.ParseException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    // one day in milliseconds setting variable to send reminder before 24 hours
-                    long oneDay = 86400000;
-                    long milliseconds = date.getTime();
-                    long millisecondsFromNow = milliseconds - (new Date()).getTime();
-                    long reminder = millisecondsFromNow -  oneDay;
-
-
-                    Long time = new GregorianCalendar().getTimeInMillis() + reminder;
-
-                    // create an Intent and set the class which will execute when Alarm triggers, here we have
-                    // given AlarmReceiver in the Intent, the onRecieve() method of this class will execute when
-                    // alarm triggers and
-                    //we will write the code to send SMS inside onRecieve() method pf Alarmreciever class
-                    Intent intentAlarm = new Intent(Confirm_Appointments_View.this, AlarmReceiver.class);
-                    // create the object
-                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                    //set the alarm for particular time
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, time, PendingIntent.getBroadcast(Confirm_Appointments_View.this, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-                  //   Toast.makeText(Booking_Appointments_View.this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
-
 
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Doctor");
                     query.whereEqualTo("Appointment_Number", AppNo);
@@ -218,137 +174,7 @@ public class Confirm_Appointments_View extends Activity {
                 }
             }});
 
-        cancelAppointment.setOnClickListener(new View.OnClickListener() {
 
-            ParseObject PatientAppointment = new ParseObject("Doctor");
-            @Override
-            public void onClick(View view) {
-
-                ConnectionDetector cd;
-                // creating connection detector class instance
-                cd = new ConnectionDetector(getApplicationContext());
-                // get Internet status
-                isInternetPresent = cd.isConnectingToInternet();
-                // check for Internet status
-
-                if (isInternetPresent) {
-                ParseQuery<ParseObject> Doctorquery = ParseQuery.getQuery("Doctor");
-                String drid = DrID.getText().toString().trim();
-                String drname = DrName.getText().toString().trim();
-                String appointment= Appointment.getText().toString().trim();
-                String AppNo = AppointmentNO.getText().toString();
-
-                Doctorquery.whereEqualTo("Appointment_Number",AppNo);
-                Doctorquery.findInBackground(new FindCallback<ParseObject>() {
-                    public void done(List<ParseObject> v, ParseException e) {
-                        if (e == null) {
-                            // ParseObject.deleteAllInBackground(v);
-                            for (final ParseObject invite : v) {
-                                ParseUser.getCurrentUser().refreshInBackground(new RefreshCallback() {
-                                    public void done(ParseObject object, ParseException e) {
-                                        if (e == null) {
-                                            Toast toast = Toast.makeText(Confirm_Appointments_View.this, " Appointment Cancel Already ", Toast.LENGTH_LONG);
-                                            toast.setGravity(Gravity.CENTER, 0, 0);
-                                            toast.show();
-                                            Intent takeUserHome = new Intent(Confirm_Appointments_View.this, Patient.class);
-                                            startActivity(takeUserHome);
-                                            // Success!
-                                        } else {
-
-                                            // Failure!
-                                        }
-                                    }
-                                });
-                            }
-                        } else {
-
-                        }
-                    }
-                });
-
-
-                PatientAppointment.put("Doctor_ID",drid);
-                PatientAppointment.put("Doctor_Name",drname);
-                PatientAppointment.put("Appointment_Slot",appointment);
-                PatientAppointment.put("Appointment_Number",AppNo);
-                ParseUser user = ParseUser.getCurrentUser();
-                Number decrement = (Number) user.get("Activity");
-                if (decrement.equals(2)){
-                    user.put("Activity",1);
-                    user.saveInBackground();
-                    user.saveEventually();
-
-                }else if(decrement.equals(1)){
-
-                    user.put("Activity",0);
-                    user.saveInBackground();
-                    user.saveEventually();
-                }
-
-                PatientAppointment.saveInBackground();
-                ParseQuery<ParseInstallation> pQuery = ParseInstallation.getQuery();
-                pQuery.whereEqualTo("username", ParseUser.getCurrentUser());
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientAppointment");
-                query.whereEqualTo("Appointment_No",AppNo);
-                query.findInBackground(new FindCallback<ParseObject>() {
-                    public void done(List<ParseObject> v, ParseException e) {
-                        if (e == null) {
-                            // ParseObject.deleteAllInBackground(v);
-                            for (ParseObject invite : v) {
-                                invite.deleteEventually();
-                                ParseUser.getCurrentUser().refreshInBackground(new RefreshCallback() {
-                                    public void done(ParseObject object, ParseException e) {
-                                        if (e == null) {
-                                            Toast toast = Toast.makeText(Confirm_Appointments_View.this, " Appointment Cancel Successfully ", Toast.LENGTH_LONG);
-                                            toast.setGravity(Gravity.CENTER, 0, 0);
-                                            toast.show();
-                                            Intent takeUserHome = new Intent(Confirm_Appointments_View.this, Patient.class);
-                                            startActivity(takeUserHome);
-                                            // Success!
-                                        } else {
-                                            // Failure!
-                                        }
-                                    }
-                                });
-                            }
-                        } else {
-                            //Handle condition here
-                        }
-                    }
-                });
-                ParseQuery<ParseObject> DocQuery = ParseQuery.getQuery("DoctorView");
-                DocQuery.whereEqualTo("Appointment_No",AppNo);
-                DocQuery.findInBackground(new FindCallback<ParseObject>() {
-                    public void done(List<ParseObject> v, ParseException e) {
-                        if (e == null) {
-                            // ParseObject.deleteAllInBackground(v);
-                            for (ParseObject invite : v) {
-                                invite.deleteEventually();
-                                ParseUser.getCurrentUser().refreshInBackground(new RefreshCallback() {
-                                    public void done(ParseObject object, ParseException e) {
-                                        if (e == null) {
-
-                                        } else {
-                                            // Failure!
-                                        }
-                                    }
-                                });
-                            }
-                        } else {
-                            //Handle condition here
-                        }
-                    }
-                });
-
-                ParsePush push = new ParsePush();
-                push.setQuery(pQuery);
-                push.setMessage("You have Successfully cancel your appointment on "+ appointment);
-                push.sendInBackground();
-                Confirm_Appointments_View.this.finish();
-            }else{
-                    showAlertDialog(Confirm_Appointments_View.this, "No Internet Connection",
-                            "Please check your internet connection.", false);
-                }}});
 
     }
 

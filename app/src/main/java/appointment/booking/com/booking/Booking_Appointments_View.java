@@ -132,11 +132,34 @@ public class Booking_Appointments_View extends Activity {
                     // counting patient appointment to restrict patient
                     // so patient can not book more than two appointment
                     user.increment("Activity");
-                    user.saveEventually(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
+
+                    // incrementing Doctor Count for popularity
+                    ParseQuery<ParseObject> CountPopDoc = ParseQuery.getQuery("PopularDoctor");
+                    CountPopDoc.whereEqualTo("DoctorName", drname);
+                    CountPopDoc.findInBackground(new FindCallback<ParseObject>() {
+                        public void done(List<ParseObject> v, ParseException e) {
+                            if (e == null) {
+
+                                for (ParseObject invite : v) {
+                                    // incrementing appointmentRequested no of particular doctor
+                                    invite.increment("AppointmentRequested");
+                                    invite.saveEventually();
+                                }
+                            } else {
+                                // if doctor count not properly
+                                Toast toast = Toast.makeText(Booking_Appointments_View.this, "Doctor Count Fail", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            }
                         }
                     });
+
+
+                            user.saveEventually(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                }
+                            });
                     PatientAppointment.saveEventually(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
@@ -163,7 +186,7 @@ public class Booking_Appointments_View extends Activity {
                     Long time = new GregorianCalendar().getTimeInMillis() + reminder;
 
                     // create an Intent and set the class which will execute when Alarm triggers, here we have
-                    // given AlarmReceiver in the Intent, the onRecieve() method of this class will execute when
+                    // given AlarmReceiver in the Intent, the onReceive() method of this class will execute when
                     // alarm triggers and send notification
 
                     Intent intentAlarm = new Intent(Booking_Appointments_View.this, AlarmReceiver.class);
@@ -247,7 +270,6 @@ public class Booking_Appointments_View extends Activity {
                 // get Internet status
                 isInternetPresent = cd.isConnectingToInternet();
                 // check for Internet status
-
                 if (isInternetPresent) {
                     ParseQuery<ParseObject> Doctorquery = ParseQuery.getQuery("Doctor");
                     String drid = DrID.getText().toString().trim();
@@ -265,7 +287,6 @@ public class Booking_Appointments_View extends Activity {
                                     invite.deleteInBackground();
                                     Intent takeUserHome = new Intent(Booking_Appointments_View.this, Patient.class);
                                     startActivity(takeUserHome);
-
                                 }
                             } else {
                                 // if appointment not cancel Successfully
@@ -309,6 +330,7 @@ public class Booking_Appointments_View extends Activity {
                     }
                     // saving all the data to parse
                     PatientAppointment.saveEventually();
+
 
                     ParseQuery<ParseInstallation> pQuery = ParseInstallation.getQuery();
                     pQuery.whereEqualTo("username", ParseUser.getCurrentUser());

@@ -7,27 +7,34 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import appointment.booking.com.heathfield.R;
 
 public class Booking_ListViewAdapter extends BaseAdapter {
+
+    private ListView mListView;
 
 	// Declare Variables
 	Context mContext;
 	LayoutInflater inflater;
 	private List<App_Booking_and_cancel_support> HeathfieldAppointment = null;
 	private ArrayList<App_Booking_and_cancel_support> arraylist;
+
 	public Booking_ListViewAdapter(Context context,
                                    List<App_Booking_and_cancel_support> HeathfieldAppointment) {
 		mContext = context;
+
 		this.HeathfieldAppointment = HeathfieldAppointment;
 		inflater = LayoutInflater.from(mContext);
 		this.arraylist = new ArrayList<App_Booking_and_cancel_support>();
 		this.arraylist.addAll(HeathfieldAppointment);
+
 	}
 
     @Override
@@ -49,10 +56,14 @@ public class Booking_ListViewAdapter extends BaseAdapter {
     public View getView(final int position, View view, ViewGroup parent) {
         final ViewHolder holder;
 
+
         if (view == null) {
             holder = new ViewHolder();
+
             view = inflater.inflate(R.layout.listview_item, null);
             // Locate the TextViews in listview_item.xml
+
+
             holder.D_Id = (TextView) view.findViewById(R.id.Doctor_id);
             holder.D_Name = (TextView) view.findViewById(R.id.Doctor_name);
             holder.P_Appointment = (TextView) view.findViewById(R.id.Appointment);
@@ -69,7 +80,7 @@ public class Booking_ListViewAdapter extends BaseAdapter {
         holder.D_Name.setText(HeathfieldAppointment.get(position).getDoctor_Name());
         holder.P_Appointment.setText(HeathfieldAppointment.get(position).getAppointment_Date());
         holder.P_Appointment_No.setText((HeathfieldAppointment.get(position).getAppointment_number()));
-        //   holder.P_Appointment_No.setText("hello");
+
 
         // Listen for ListView Item Click
         view.setOnClickListener(new OnClickListener() {
@@ -94,11 +105,27 @@ public class Booking_ListViewAdapter extends BaseAdapter {
                 // Start Booking_Appointments_View Class
                 mContext.startActivity(intent);
                 // intent.removeExtra("Cancel");
-
+                 BookingAppointment app = new BookingAppointment();
+                 app.finish();
             }
         });
 
         return view;
+    }  // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        HeathfieldAppointment.clear();
+        if (charText.length() == 0) {
+            HeathfieldAppointment.addAll(arraylist);
+        } else {
+            for (App_Booking_and_cancel_support wp : arraylist) {
+                if (wp.getDoctor_Name().toLowerCase(Locale.getDefault())
+                        .contains(charText)) {
+                    HeathfieldAppointment.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public class ViewHolder {

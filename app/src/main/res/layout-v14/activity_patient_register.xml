@@ -31,7 +31,6 @@
             android:layout_marginTop="5dp"
             android:ems="12"
             android:focusable="true"
-
             android:hint="First Name"
             android:inputType="textPersonName"
             android:maxLength="30"
@@ -52,11 +51,12 @@
             android:layout_marginTop="2dp"
             android:drawableRight="@android:drawable/ic_menu_my_calendar"
             android:editable="false"
-            android:clickable="true"
-            android:focusable="false"
+
             android:ems="12"
             android:hint="Date of Birth     DD/MM/YYYY"
             android:inputType="date"
+            android:clickable="true"
+            android:focusable="false"
             android:maxLength="10"
             android:textColor="@android:color/background_dark"
             android:textColorHint="@android:color/background_dark"
@@ -67,13 +67,12 @@
             style="@android:style/ButtonBar"
             android:layout_width="175dp"
             android:layout_height="50dp"
-            android:layout_below="@+id/Password"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="2dp"
             android:background="@drawable/button"
             android:clickable="true"
             android:text="Register"
-            android:textSize="@dimen/activity_horizontal_margin" />
+            android:textSize="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/Password"
+            android:layout_centerHorizontal="true" />
 
 
         <EditText
@@ -181,16 +180,13 @@
             android:id="@+id/AllReadyAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/SignUpButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="7dp"
             android:text="Already have an Account ?"
             android:textColor="#ff1e690e"
             android:textSize="@dimen/abc_action_bar_title_text_size"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_below="@+id/SignUpButton"
+            android:layout_alignRight="@+id/SignUpButton"
+            android:layout_alignEnd="@+id/SignUpButton" />
 
         <TextView
             android:id="@+id/textView3"
@@ -210,16 +206,16 @@
             android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_alignEnd="@+id/DateofBirth"
+            android:layout_alignLeft="@+id/DateofBirth"
+            android:layout_alignRight="@+id/DateofBirth"
+            android:layout_alignStart="@+id/DateofBirth"
             android:layout_below="@+id/DateofBirth"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/background_light"
             android:focusable="true"
-            android:spinnerMode="dialog"
-            android:layout_alignRight="@+id/DateofBirth"
-            android:layout_alignEnd="@+id/DateofBirth"
-            android:layout_alignLeft="@+id/DateofBirth"
-            android:layout_alignStart="@+id/DateofBirth">
+            android:spinnerMode="dialog">
 
         </Spinner>
 
@@ -236,6 +232,7 @@
             android:layout_marginTop="2dp"
             android:drawableRight="@android:drawable/ic_menu_call"
             android:hint="07961279239"
+            android:maxLength="11"
             android:phoneNumber="true"
             android:textColorHint="@android:color/background_dark"
             android:textSize="@dimen/abc_action_bar_subtitle_text_size" />

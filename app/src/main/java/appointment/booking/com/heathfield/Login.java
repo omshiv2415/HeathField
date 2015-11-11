@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.parse.ParseAnalytics;
+
 import appointment.booking.com.Doctor.Doctor_Content.DoctorLogin;
 import appointment.booking.com.patient.PatientLogin;
 
@@ -23,7 +25,7 @@ public class Login extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
         // image button initializing
         Doctors = (ImageButton)findViewById(R.id.Doctor);

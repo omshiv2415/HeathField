@@ -29,10 +29,11 @@ public class Patient extends TabActivity {
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         tabHost.getTabWidget().setDividerDrawable(null);
 
+        // getting parse user is patient or Doctor
         final String verify = ParseUser.getCurrentUser().get("Verify").toString();
         //final String verify =  "Doctor";
         final String DcCheck = "Patient";
-
+        // checking user is patient or doctor
         if (verify.equals(DcCheck)) {
             ParseInstallation installation = ParseInstallation.getCurrentInstallation();
             installation.put("username", ParseUser.getCurrentUser());

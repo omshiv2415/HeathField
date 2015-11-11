@@ -18,8 +18,8 @@
     <permission
         android:name="appointment.booking.com.heathfield.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-
     <uses-permission android:name="appointment.booking.com.heathfield.permission.C2D_MESSAGE" />
+
 
     <application
         android:name="appointment.booking.com.support.AppParse"
@@ -112,7 +112,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <activity
-            android:name="appointment.booking.com.patient.PatientHome"
+            android:name="appointment.booking.com.patient.PatientDetails"
             android:label="@string/title_activity_patient_home"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>

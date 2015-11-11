@@ -5,15 +5,21 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.CountCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
@@ -23,8 +29,10 @@ import com.parse.RefreshCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import appointment.booking.com.heathfield.R;
+import appointment.booking.com.patient.PatientDetails;
 
 public class BookingAppointment extends Activity {
     // Declare Variables
@@ -38,6 +46,7 @@ public class BookingAppointment extends Activity {
     private TextView PopularDoctor;
     private TextView TotalNoOfAppointment;
     private TextView DisplayPatientName;
+    EditText SearchAppointment;
 
     private List<App_Booking_and_cancel_support> HeathFieldSurgery = null;
 
@@ -121,9 +130,20 @@ public class BookingAppointment extends Activity {
         TotalNoOfAppointment.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         DisplayPatientName.setTypeface(Heading);
         DisplayPatientName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-
+        SearchAppointment = (EditText) findViewById(R.id.ApponintmentSearch);
+        SearchAppointment.setSelected(false);
 
         DisplayPatientName.setText((CharSequence) ParseUser.getCurrentUser().get("Name"));
+
+        DisplayPatientName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takeUserHome = new Intent(BookingAppointment.this, PatientDetails.class);
+                startActivity(takeUserHome);
+            }
+        });
+
+
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("Verify", "Patient");
         query.countInBackground(new CountCallback() {
@@ -176,12 +196,32 @@ public class BookingAppointment extends Activity {
                     // The count request succeeded. Log the count
                     TotalNoOfAppointment.setText(Integer.toString(count));
 
+
+
+
                 } else {
                     // The request failed
                 }
             }
         });
 
+
+        // getting popular doctor from Heath Field Parse Database
+        ParseQuery<ParseObject> FidPopDoc = ParseQuery.getQuery("PopularDoctor");
+        // setting up the AppointmentRequested in DescendingOrder so i can get max count
+        // of appointmentRequested.
+        FidPopDoc.addDescendingOrder("AppointmentRequested");
+        // finding first value of AppointmentRequested to find popular Doctor
+        FidPopDoc.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (object == null) {
+
+                } else {
+                    // Setting up popular doctor name to popular doctor textview
+                    PopularDoctor.setText((CharSequence) object.get("DoctorName"));
+                }
+            }
+        });
     }
 
     @Override
@@ -205,7 +245,7 @@ public class BookingAppointment extends Activity {
     @Override
     public void onStop() {
         super.onStop();
-        this.finish();
+        //this.finish();
 
     }
 
@@ -281,6 +321,7 @@ public class BookingAppointment extends Activity {
         protected void onPostExecute(Void result) {
             // Locate the listview in activity_booking_appointment.xmlappointment.xml
             listview = (ListView) findViewById(R.id.listview);
+
             // Pass the results into Booking_ListViewAdapter.java
             adapter = new Booking_ListViewAdapter(BookingAppointment.this,
                     HeathFieldSurgery);
@@ -288,7 +329,32 @@ public class BookingAppointment extends Activity {
             listview.setAdapter(adapter);
             // Close the progressdialog
             mProgressDialog.dismiss();
+            SearchAppointment = (EditText) findViewById(R.id.ApponintmentSearch);
+            //  SearchAppointment.setSelected(false);
+            // Capture Text in EditText
+            SearchAppointment.addTextChangedListener(new TextWatcher() {
 
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    // TODO Auto-generated method stub
+                    String text = SearchAppointment.getText().toString()
+                            .toLowerCase(Locale.getDefault());
+                    adapter.filter(text);
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence arg0, int arg1,
+                                              int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void onTextChanged(CharSequence arg0, int arg1,
+                                          int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                }
+            });
 
         }
 

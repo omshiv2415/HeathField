@@ -319,5 +319,13 @@
         android:layout_below="@+id/doctor_Name"
         android:text="DR1234"
         android:textColor="@android:color/background_dark" />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageView1"
+        android:background="@drawable/arrow_right"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

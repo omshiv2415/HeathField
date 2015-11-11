@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:drawable/dialog_holo_light_frame">
+    android:background="@android:drawable/dialog_holo_light_frame"
+    >
 
     <TextView
         android:id="@+id/ranklabel"
@@ -89,5 +90,15 @@
         android:layout_toRightOf="@+id/populationlabel1"
         android:text="5"
         android:textColor="@android:color/background_dark" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageView"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/arrow_right"
+        android:layout_alignTop="@+id/Doctor_id"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

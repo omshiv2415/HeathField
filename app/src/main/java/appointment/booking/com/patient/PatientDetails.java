@@ -18,7 +18,7 @@ import com.parse.SaveCallback;
 import appointment.booking.com.heathfield.R;
 
 
-public class PatientHome extends Activity {
+public class PatientDetails extends Activity {
 
     EditText email ;
     EditText mUsername;
@@ -27,6 +27,7 @@ public class PatientHome extends Activity {
     EditText mGender;
     Button Update;
     EditText mDateOfBirth;
+    EditText mPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,9 @@ public class PatientHome extends Activity {
         mName = (EditText)findViewById(R.id.name);
         mGender = (EditText)findViewById(R.id.gender);
         mDateOfBirth =(EditText)findViewById(R.id.dateofbirth);
+        mPassword = (EditText)findViewById(R.id.password);
         Update = (Button)findViewById(R.id.update);
+
 
         email.setText(ParseUser.getCurrentUser().getEmail());
         mUsername.setText(ParseUser.getCurrentUser().getUsername());
@@ -45,6 +48,10 @@ public class PatientHome extends Activity {
         mGender.setText((CharSequence) ParseUser.getCurrentUser().get("Gender"));
         mName.setText((CharSequence) ParseUser.getCurrentUser().get("Name"));
         mLastname.setText((CharSequence) ParseUser.getCurrentUser().get("LastName"));
+        mPassword.setText((CharSequence) ParseUser.getCurrentUser().get("password"));
+        mDateOfBirth.setEnabled(false);
+        mGender.setEnabled(false);
+        mPassword.setEnabled(false);
 
 
 
@@ -57,6 +64,8 @@ public class PatientHome extends Activity {
             final String myname      =    mName.getText().toString();
             final String mUsernam    =    mUsername.getText().toString();
             final String myemail     =    email.getText().toString();
+            final String password =        mPassword.getText().toString();
+
 
 
 
@@ -66,6 +75,7 @@ public class PatientHome extends Activity {
                 user.put("LastName", lastname);
                 user.put("DateofBirth", dateofbirth);
                 user.put("Name", myname);
+               // user.setPassword(password);
 
 
                 user.saveInBackground(new SaveCallback() {
@@ -76,12 +86,12 @@ public class PatientHome extends Activity {
 
                         if (e == null) {
                             //Success!
-                            Toast.makeText(PatientHome.this, " Your Details updated successfully ", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(PatientHome.this, PatientHome.class);
+                            Toast.makeText(PatientDetails.this, "Your Details updated successfully", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(PatientDetails.this, Patient.class);
                             startActivity(intent);
-
+                            PatientDetails.this.finish();
                         } else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(PatientHome.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(PatientDetails.this);
                             builder.setMessage(e.getMessage())
                                     .setTitle(R.string.sign_up_error_title)
                                     .setPositiveButton(android.R.string.ok, null);

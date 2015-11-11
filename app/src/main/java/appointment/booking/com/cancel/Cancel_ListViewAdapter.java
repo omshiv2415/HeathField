@@ -12,9 +12,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import appointment.booking.com.heathfield.R;
-import appointment.booking.com.booking.Booking_Appointments_View;
 import appointment.booking.com.booking.App_Booking_and_cancel_support;
+import appointment.booking.com.booking.Booking_Appointments_View;
+import appointment.booking.com.heathfield.R;
 
 public class Cancel_ListViewAdapter extends BaseAdapter {
 
@@ -103,6 +103,9 @@ public class Cancel_ListViewAdapter extends BaseAdapter {
 				// Start Booking_Appointments_View Class
 				mContext.startActivity(intent);
                // intent.removeExtra("Cancel");
+
+                PatientCancelActivity app = new PatientCancelActivity();
+                app.finish();
 
 			}
 		});

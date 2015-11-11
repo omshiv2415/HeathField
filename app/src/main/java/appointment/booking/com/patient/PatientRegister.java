@@ -2,7 +2,6 @@ package appointment.booking.com.patient;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -44,22 +43,10 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
     String Gender;
     Spinner spinnerGender;
     private TextToSpeech speech;
+    private String[] state = {"Male", "Female"};
     private int mYear;
     private int mMonth;
     private int mDay;
-    private DatePickerDialog.OnDateSetListener mDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
-
-                public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                      int dayOfMonth) {
-                    mYear = year;
-                    mMonth = monthOfYear;
-                    mDay = dayOfMonth;
-                    updateDisplay();
-                }
-            };
-    private String[] state = {"Male", "Female"};
-    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,27 +61,45 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
         lastname = (EditText) findViewById(R.id.LastName);
         p_Phone = (EditText) findViewById(R.id.PatientPhone);
         spinnerGender = (Spinner) findViewById(R.id.gender);
-
-
         ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, state);
         adapter_state
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(adapter_state);
-
         spinnerGender.setOnItemSelectedListener(this);
 
-
+        // setting onClick Listener on editText to select Appointment Date
         DateOfBirth.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DATE_DIALOG_ID);
+
+            @Override
+            public void onClick(View view) {
+
+                Calendar mAppointmentDate = Calendar.getInstance();
+                mYear = mAppointmentDate.get(Calendar.YEAR);
+                mMonth = mAppointmentDate.get(Calendar.MONTH);
+                mDay = mAppointmentDate.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog mDatePicker;
+
+                mDatePicker = new DatePickerDialog(PatientRegister.this, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i2, int i3) {
+                        DateOfBirth.setFocusable(false);
+                        DateOfBirth.setText(i3 + "/" + (i2+1) + "/"+ i);
+                    }
+                }, mDay, mMonth, mYear);//Yes 24 hour time
+
+                mDatePicker.setTitle("Select Date of Birth");
+                mDatePicker.updateDate(mYear, mMonth, mDay);
+                mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+                mDatePicker.show();
+
+
             }
         });
-        final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-        updateDisplay();
+
+
 
         // when user press already have an account it will take user to login page
         AllreadyHaveanAccount = (TextView) findViewById(R.id.AllReadyAccount);
@@ -321,35 +326,7 @@ public class PatientRegister extends Activity implements AdapterView.OnItemSelec
         return false;
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
 
-            case DATE_DIALOG_ID:
-                return new DatePickerDialog(this,
-                        mDateSetListener,
-                        mYear, mMonth, mDay);
-        }
-        return null;
-    }
-
-    protected void onPrepareDialog(int id, Dialog dialog) {
-        switch (id) {
-
-            case DATE_DIALOG_ID:
-                ((DatePickerDialog) dialog).updateDate(mYear, mMonth, mDay);
-                break;
-        }
-    }
-
-    private void updateDisplay() {
-        DateOfBirth.setText(
-                new StringBuilder()
-                        // Month is sunny based so add 1
-                        .append(mDay).append("/")
-                        .append(mMonth + 1).append("/")
-                        .append(mYear).append(" "));
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

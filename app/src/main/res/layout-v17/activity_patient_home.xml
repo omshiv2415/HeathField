@@ -6,64 +6,123 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="appointment.booking.com.patient.PatientHome">
+    tools:context="appointment.booking.com.patient.PatientDetails"
+    android:background="@android:color/holo_blue_light">
+
+
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/background_light"
+            android:orientation="horizontal">
+            </LinearLayout>
+
 
     <EditText
         android:id="@+id/Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp" />
+        android:hint="Email Address"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/gender"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/Username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp" />
+        android:hint="User Name"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/Email"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Name"
+
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="21dp" />
 
     <EditText
         android:id="@+id/gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp" />
+        android:hint="Gender"
+        android:focusable="false"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/dateofbirth"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:editable="false" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp" />
+        android:hint="Password"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/Username"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:id="@+id/lastname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:hint="Last Name"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/dateofbirth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp" />
+        android:hint="Date of Birth"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/lastname"
+        android:focusable="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:text="Update" />
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="55dp"
+        android:text="Update"
+        android:background="@drawable/button"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textStyle="bold"
+        android:textSize="@dimen/activity_horizontal_margin"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heath Field Surgery"
+            android:id="@+id/textView"
+            android:textStyle="bold|italic"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/heath"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

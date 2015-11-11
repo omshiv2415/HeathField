@@ -42,7 +42,7 @@ public class Prescription_View extends Activity {
     String P_MEDICINE_REFILL;
     String P_DoctorId;
     Button ORDER_PRISCRIPTION;
-    Button cancelAppointment;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,7 @@ public class Prescription_View extends Activity {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
 
-                }else if(prescription > 5){
+                }else if(prescription >= 5){
                     Toast toast = Toast.makeText(Prescription_View.this, " Sorry you can't order more than 5 prescription", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
@@ -145,14 +145,27 @@ public class Prescription_View extends Activity {
                     Toast toast = Toast.makeText(Prescription_View.this, "Prescription Order Successfully ", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
+
                     Intent takeUserHome = new Intent(Prescription_View.this, Patient.class);
                     startActivity(takeUserHome);
-
+                    Prescription_View.this.finish();
 
             }
         }});
 
+    }
 
 
 
-}}
+    @Override
+    public void onBackPressed() {
+
+        this.finish();
+        Intent takeUserHome = new Intent(Prescription_View.this, Patient.class);
+        startActivity(takeUserHome);
+
+
+    }
+
+
+}

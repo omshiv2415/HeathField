@@ -11,8 +11,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +22,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
@@ -34,6 +33,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import appointment.booking.com.heathfield.R;
 import appointment.booking.com.patient.Patient;
@@ -82,8 +82,7 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
         // getting patient information and setting to editText box
-        //RPatientNamePatient.setText(ParseUser.getCurrentUser().getEmail());
-        //Rpatientid.setText(ParseUser.getCurrentUser().getObjectId().toUpperCase());
+
         RpatientPhone.setFocusable(false);
         RpatientPhone.setText((CharSequence) ParseUser.getCurrentUser().get("Contact_Number"));
         RPatientNamePatient.setFocusable(false);
@@ -128,6 +127,7 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Appointment Time");
+
                 mTimePicker.show();
             }
         });
@@ -151,9 +151,19 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
                         RAppointmentDatePatient.setText(i3 + "-" + (i2+1) + "-"+ i);
                     }
                 }, mDay, mMonth, mYear);//Yes 24 hour time
+
                 mDatePicker.updateDate(mYear, mMonth, mDay);
+                long mSetMonth = 262800000*10;
                 mDatePicker.setTitle("Select Appointment Date");
+                mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() + 86400000);
+                mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis() - mSetMonth);
+
+
+
+
                 mDatePicker.show();
+
+
             }
         });
 
@@ -233,6 +243,23 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
 
                 }
 
+               // incrementing Doctor Count for popularity
+
+                ParseQuery<ParseObject> query1 = ParseQuery.getQuery("PopularDoctor");
+                query1.whereEqualTo("DoctorName", Doctor);
+                query1.findInBackground(new FindCallback<ParseObject>() {
+                    public void done(List<ParseObject> v, com.parse.ParseException e) {
+                        if (e == null) {
+
+                            for (ParseObject invite : v) {
+                                invite.increment("AppointmentRequested");
+                                invite.saveEventually();
+                            }
+                        } else {
+
+                        }
+                    }
+                });
                 Toast toast = Toast.makeText(RequestAppointment.this, "Appointment Requested \n          Successfully", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
@@ -251,24 +278,7 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.request_appointment, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -287,7 +297,7 @@ public class RequestAppointment extends  Activity implements AdapterView.OnItemS
     @Override
     public void onStop() {
         super.onStop();
-        this.finish();
+        //this.finish();
 
     }
     @Override

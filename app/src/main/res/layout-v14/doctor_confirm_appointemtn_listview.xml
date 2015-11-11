@@ -182,5 +182,15 @@
         android:layout_alignTop="@+id/textView3"
         android:text="12431"
         android:textColor="@android:color/background_dark" />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageView"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/arrow_right"
+        android:layout_alignTop="@+id/Doctor_id"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

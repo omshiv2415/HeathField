@@ -27,13 +27,15 @@ public class Doctor extends TabActivity {
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         tabHost.getTabWidget().setDividerDrawable(null);
 
+        // getting parse user is patient or Doctor
         final String verify = ParseUser.getCurrentUser().get("Verify").toString();
         final String DcCheck = "Doctor";
-
+        // checking user is patient or doctor
         if (verify.equals(DcCheck)) {
             ParseInstallation installation = ParseInstallation.getCurrentInstallation();
             installation.put("username", ParseUser.getCurrentUser());
             installation.saveInBackground();
+
             TabHost.TabSpec tab1 = tabHost.newTabSpec("First Tab");
             TabHost.TabSpec tab2 = tabHost.newTabSpec("Second Tab");
             TabHost.TabSpec tab3 = tabHost.newTabSpec("Third Tab");

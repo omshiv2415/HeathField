@@ -2,7 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/DayTrackViralP" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Heath-Field" vcs="Git" />
   </component>
 </project>
